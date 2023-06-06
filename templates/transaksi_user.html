@@ -15,9 +15,7 @@
         #search{
             margin-right: -50px;
         }
-        .hero{
-          background-color:rgba(0, 187, 245, 12%);
-        }
+       
         ul img {
           margin-left: 25px;
           margin-right: 20px;
@@ -41,6 +39,17 @@
         #logo{
           height: 40px;
           width: auto;
+        }
+        .img img{
+            width: 100%;
+        }
+        .list p{
+            font-size: 30px;
+            color: black;
+        }
+        .btn{
+            width: 100%;
+            font-size: 30px;
         }
     </style>
   </head>
@@ -81,55 +90,42 @@
         </ul>
       </nav>
       <!-- navbar end -->
-      <!-- hero -->
-      <div class="hero">
-        <div class="container col-xxl-8 px-4 py-5">
-            <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-              <div class="col-10 col-lg-4 col-lg-6">
-                <img src="../static/sepatu.png" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="200%" height="200%" loading="lazy">
+     <!-- transaksi -->
+     <div class="container py-5">
+        <div class="row align-items-md-stretch">
+            <div class="col-md-6">
+              <div class="h-100 text-bg-secondary rounded-3">
+                <div class="img">
+                   <img src="../static/shoes2.jpg" alt="">
+                </div>
+                <div class="list px-4 py-4">
+                    <p>Jenis Sepatu: </p>
+                    <p>Harga Sepatu:</p>
+                    <p>Total Belanja:</p>
+                </div>
+                
+                
               </div>
-              <div class="col-lg-6">
-                <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Triples's Branded</h1>
-                <p class="lead">Triples's Branded merupakan usaha yang menjual sepatu preloved berkualitas tinggi. Dengan menyatukan konsumen yang berpikiran sama, Triple's Branded membantu menyediakan sepatu bekas bermerek yang masih layak pakai dengan harga terjangkau.</p>
-                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-                  <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Read more</button>
+            </div>
+            <div class="col-md-6">
+              <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+                <h2>Alamat Pengiriman</h2>
+                <div class="list py-2">
+                    <p>Nama: </p>
+                    <p>No Telepon:</p>
+                    <p>Alamat:</p>
+                </div>
+                <h2 class="mt-5">Informasi Pengiriman</h2>
+                <div class="list py-2">
+                    <p>Sudah Dikirim </p>
                 </div>
               </div>
             </div>
           </div>
-      </div> 
-      <!-- hero end -->
-      <!-- katalog -->
-      <div class="container" id="custom-cards">
-        <h2 class="pb-2 border-bottom text-center mt-4">Katalog</h2>
-        <div class="row row-cols-1 row-cols-md-3 g-4">
-            <div class="col">
-              <div class="card h-100">
-                <img src="../static/contoh.jpg" class="card-img-top" alt="...">
-                <div class="card">
-                  <button class="btn btn-secondary justify-content-center">Running Shoes</button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../static/contoh.jpg" class="card-img-top" alt="...">
-                <div class="card">
-                    <button class="btn btn-secondary justify-content-center">Basket Shoes</button>
-                </div>
-              </div>
-            </div>
-            <div class="col">
-              <div class="card h-100">
-                <img src="../static/contoh.jpg" class="card-img-top" alt="...">
-                <div class="card">
-                    <button class="btn btn-secondary justify-content-center">Basket Shoes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-      <!-- katalog end -->
+          <button class="btn btn-secondary mt-5 p-2"> Buat Pesanan</button>
+     </div>
+     
+     <!-- transaksi end -->
       <!-- footer -->
       <div class="container-fluid bg-secondary" style="margin-bottom: -30px">
         <footer

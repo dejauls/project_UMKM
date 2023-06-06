@@ -15,13 +15,10 @@
         color: white;
       }
       #link {
-        margin-left: 20%;
+        margin-left: 60px;
       }
-      #search {
-        margin-right: 20px;
-      }
-      .person {
-        margin-right: 10px;
+      #search{
+         margin-right: -50px;
       }
       .hero {
         background-color: rgba(0, 187, 245, 12%);
@@ -41,6 +38,10 @@
         margin-left: 30px;
         color: antiquewhite;
       }
+      #logo{
+          height: 40px;
+          width: auto;
+      }
       
       
     </style>
@@ -49,7 +50,9 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg bg-secondary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">LOGO</a>
+        <a class="navbar-brand" href="#">
+          <img id="logo" src="../static/logo.png" alt="">
+        </a>
         <div class="container" id="link">
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -86,9 +89,10 @@
           <button class="btn btn-primary" type="submit">Search</button>
         </form>
       </div>
-      <div class="person">
-        <img src="../static/person.svg" alt="person" />
-      </div>
+      <ul class="col-md-2 justify-content-end">
+        <img src="../static/person.svg" href="#" alt="" />
+        <img src="../static/cart.svg" href="#" alt="" />
+      </ul>
     </nav>
     <!-- navbar end -->
     <!-- hero -->
