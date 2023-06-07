@@ -13,19 +13,11 @@
         }
 
         #link {
-            margin-left: 20%;
+            margin-left: 60px;
         }
 
         #search {
-            margin-right: 20px;
-        }
-
-        .person {
-            margin-right: 10px;
-        }
-
-        .hero {
-            background-color: rgba(0, 187, 245, 12%);
+            margin-right: -50px;
         }
 
         ul img {
@@ -45,6 +37,30 @@
         #text {
             margin-left: 30px;
             color: antiquewhite;
+        }
+
+        a img {
+            width: 100px;
+            height: 20px;
+        }
+
+        #logo {
+            height: 40px;
+            width: auto;
+        }
+
+        .img img {
+            width: 100%;
+        }
+
+        .list p {
+            font-size: 30px;
+            color: black;
+        }
+
+        .btn {
+            width: 100%;
+            font-size: 30px;
         }
 
         .card {
@@ -69,16 +85,17 @@
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg bg-secondary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">LOGO</a>
+            <a class="navbar-brand" href="#">
+                <img id="logo" src="../static/logo.png" alt="">
+            </a>
             <div class="container" id="link">
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" href="#">Home</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Catalog
+                            <a class="nav-link" href="#" role="button">Catalog
                             </a>
                         </li>
                         <li class="nav-item">
@@ -95,9 +112,10 @@
                 <button class="btn btn-primary" type="submit">Search</button>
             </form>
         </div>
-        <div class="person">
-            <img src="../static/person.svg" alt="person">
-        </div>
+        <ul class="col-md-2 justify-content-end">
+            <img src="../static/cart.svg" href="#" alt="" />
+            <img src="../static/person.svg" href="#" alt="" />
+        </ul>
     </nav>
     <!-- navbar end -->
     <!-- login -->
