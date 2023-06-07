@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Edit Sepatu</title>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 400px;
+            padding: 20px;
+            background-color: #9e9b9b;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+        }
+
+        #jenisSepatu {
+            border-radius: 20px;
+        }
+
+        #harga {
+            border-radius: 20px;
+        }
+
+        #deskripsi {
+            border-radius: 20px;
+        }
+
+        #foto {
+            display: none;
+        }
+
+        .custom-file-upload {
+            border: 1px solid #ccc;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background-color: #f7f7f7;
+            color: #333;
+            border-radius: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .submit-button {
+            display: flex;
+            margin-top: 20px;
+        }
+    </style>
+
+    
+
+</head>
+
+
+
+<body>
+    <div class="container">
+        <h1>Form Edit Sepatu</h1>
+        <form>
+            <div class="form-group">
+                <label for="jenisSepatu">Jenis Sepatu:</label>
+                <input type="text" class="form-control" id="jenisSepatu" placeholder="Masukkan jenis sepatu">
+            </div>
+            <div class="form-group">
+                <label for="harga">Harga:</label>
+                <input type="number" class="form-control" id="harga" placeholder="Masukkan harga sepatu">
+            </div>
+            <div class="form-group">
+                <label for="deskripsi">Deskripsi:</label>
+                <textarea class="form-control" id="deskripsi" placeholder="Masukkan deskripsi sepatu"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="foto">Foto Sepatu:</label>
+                <label class="custom-file-upload">
+                    <input type="file" id="foto"> Pilih Foto
+                </label>
+            </div>
+            <div class="submit-button">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
