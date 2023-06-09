@@ -26,7 +26,9 @@
         #search{
             margin-right: -50px;
         }
-       
+        .hero{
+          background-color:rgba(0, 187, 245, 12%);
+        }
         ul img {
           margin-left: 25px;
           margin-right: 20px;
@@ -43,48 +45,41 @@
             margin-left: 30px;
             color: antiquewhite;
         }
-       
-        .img img{
-            width: 100%;
-        }
-        .list p{
-            font-size: 30px;
-            color: black;
-        }
-        #btn{
-            width: 100%;
-            font-size: 30px;
+    
+        #logo{
+          height: 30px;
+          width: auto;
         }
     </style>
   </head>
   <body>
     <!-- navbar -->
-    <header class="p-3 text-bg-secondary ">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <img class="bi me-2 mr-5"  width="150px" height="auto" src="../static/logo.png"></img>
-          </a>
-  
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-1 text-white">Home</a></li>
-            <li><a href="#" class="nav-link px-1 text-white">Catalog</a></li>
-            <li><a href="#" class="nav-link px-1 text-white">About</a></li>
-            <li><a href="#" class="nav-link px-1 text-white">Contact</a></li>
-          </ul>
-  
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex" role="search">
-            <input type="search" class="form-control-sm form-control bg-white text-bg-dark" placeholder="Search..." aria-label="Search">
-            <button class="btn btn-outline-light d-inline">Search</button>
-          </form>
-  
-          <div class="text-end">
-            <button type="button" class="btn btn-primary me-2" id="login">Login</button>
-            <button type="button" class="btn btn-outline-info text-bg-secondary">History</button>
+      <header class="p-3 text-bg-secondary ">
+        <div class="container">
+          <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+              <img class="bi me-2 mr-5"  width="150px" height="auto" src="../static/logo.png"></img>
+            </a>
+    
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+              <li><a href="#" class="nav-link px-1 text-white">Home</a></li>
+              <li><a href="#" class="nav-link px-1 text-white">Catalog</a></li>
+              <li><a href="#" class="nav-link px-1 text-white">About</a></li>
+              <li><a href="#" class="nav-link px-1 text-white">Contact</a></li>
+            </ul>
+    
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex" role="search">
+              <input type="search" class="form-control-sm form-control bg-white text-bg-dark" placeholder="Search..." aria-label="Search">
+              <button class="btn btn-outline-light d-inline">Search</button>
+            </form>
+    
+            <div class="text-end">
+              <button type="button" class="btn btn-primary me-2" id="login">Login</button>
+              <button type="button" class="btn btn-outline-info text-bg-secondary">History</button>
+            </div>
           </div>
         </div>
-      </div>
-    </header>
+      </header>
       <!-- navbar end -->
       <!-- modal -->
       <div id="modal" class="modal" tabindex="-1">
@@ -108,42 +103,25 @@
         </div>
       </div>
       <!-- modal end -->
-     <!-- transaksi -->
-     <div class="container py-5">
-        <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-              <div class="h-100 text-bg-secondary rounded-3">
-                <div class="img">
-                   <img src="../static/shoes2.jpg" alt="">
-                </div>
-                <div class="list px-4 py-4">
-                    <p>Jenis Sepatu: </p>
-                    <p>Harga Sepatu:</p>
-                    <p>Total Belanja:</p>
-                </div>
-                
-                
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-                <h4>Alamat Pengiriman</h4>
-                <div class="list py-2">
-                    <p>Nama: </p>
-                    <p>No Telepon:</p>
-                    <p>Alamat:</p>
-                </div>
-                <h4 class="mt-5">Informasi Pengiriman</h4>
-                <div class="list py-2">
-                    <p>Sudah Dikirim </p>
-                </div>
-              </div>
+     <!-- upload -->
+     <div class="container p-5">
+        <div class="card bg-body-secondary" style="width: 100%; height: 160px;">
+            <div class="card-body">
+              <h5 class="card-text pb-3">Total Pembayaran:</h5>
+              <h5 class="card-text">Nomor Rekening:</h5>
             </div>
           </div>
-          <button id="btn" class="btn btn-secondary mt-5 p-2"> Buat Pesanan</button>
+          <h4 class="mt-5 mb-4">Upload Bukti Pembayaran</h4>
+          <div class="input-group mb-3">
+            <input type="file" class="form-control" id="inputGroupFile02">
+            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+          </div>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-secondary mt-4 me-md-2" type="button">Submit</button>
+          </div>
      </div>
      
-     <!-- transaksi end -->
+     <!-- upload end -->
       <!-- footer -->
       <div class="container-fluid bg-secondary" style="margin-bottom: -30px">
         <footer

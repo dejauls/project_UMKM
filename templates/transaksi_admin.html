@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Edit Sepatu</title>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function updateStatus(selectElement) {
+            var selectedOption = selectElement.options[selectElement.selectedIndex].text;
+            var row = selectElement.parentNode.parentNode.parentNode;
+            row.cells[5].innerHTML = selectedOption;
+        }
+    </script>
+
+<body>
+    <div class="container">
+        <h1>Tabel Admin</h1>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Tanggal Pemesanan</th>
+                    <th>Nama User</th>
+                    <th>Sepatu</th>
+                    <th>Alamat</th>
+                    <th>Total</th>
+                    <th>Status Pemesanan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2023-06-01</td>
+                    <td>John Doe</td>
+                    <td>Nike</td>
+                    <td>Jl. A</td>
+                    <td>$100</td>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" onchange="updateStatus(this)">
+                                <option>Belum Dikirim</option>
+                                <option>Sudah Dikirim</option>
+                                <option>Selesai</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2023-06-02</td>
+                    <td>Jane Smith</td>
+                    <td>Adidas</td>
+                    <td>Jl. B</td>
+                    <td>$80</td>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" onchange="updateStatus(this)">
+                                <option>Belum Dikirim</option>
+                                <option>Sudah Dikirim</option>
+                                <option>Selesai</option>
+                            </select>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>2023-06-03</td>
+                    <td>David Lee</td>
+                    <td>Puma</td>
+                    <td>Jl. C</td>
+                    <td>$120</td>
+                    <td>
+                        <div class="form-group">
+                            <select class="form-control" onchange="updateStatus(this)">
+                                <option>Belum Dikirim</option>
+                                <option>Sudah Dikirim</option>
+                                <option>Selesai</option>
+                            </select>
+                        </div>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+
+</html>
