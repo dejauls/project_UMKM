@@ -1,152 +1,451 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-      crossorigin="anonymous"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script>
-      $(document).ready(function(){
-        $('#login').click(function(){
-          $('#modal , #bg').fadeIn("slow");
-        });
-        $('#tutup').click(function(){
-          $('#modal , #bg').fadeOut("slow");
-        });
-      });
-    </script>
-    <style>
-      .container-fluid a {
-        color: white;
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <!-- Bulma CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+  <!-- Font Awesome CSS -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+  <!-- link bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="costum.css" rel="stylesheet" type="text/css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+  <style>
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    *,
+    html {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: rgb(255, 247, 235);
+    }
+
+    nav {
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      color: white;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      font-family: 'DM Sans', sans-serif;
+      /* justify-content: center; */
+    }
+
+    nav div img {
+      width: 50px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      font-family: "DM Sans", sans-serif;
+      color: #191919;
+      font-weight: 600;
+      padding: 8px 0;
+      transition: all;
+      transition-duration: 300ms;
+      border-bottom: 1px solid rgba(255, 68, 0, 0);
+      display: flex;
+      justify-content: left;
+      align-items: center;
+    }
+
+    nav ul li a:hover {
+      color: brown;
+      border-bottom: 1px solid brown;
+    }
+
+    .menu-icon {
+      /* background-color: tomato; */
+      font-size: 28px;
+      display: none;
+    }
+
+    .btn-hei {
+      background-color: brown;
+      color: white;
+    }
+
+    .btn-hei:hover {
+      background-color: rgb(228, 208, 180);
+    }
+
+    .btn-outline-brown {
+      color: brown;
+      border-color: brown;
+    }
+
+    .btn-outline-brown:hover {
+      background-color: brown;
+      color: white;
+    }
+
+    main {
+      padding-top: 10rem;
+    }
+
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .product {
+      margin-bottom: 30px;
+    }
+
+    .product .card-img-top {
+      object-fit: cover;
+      height: 300px;
+    }
+
+    .product .card-text {
+      margin-bottom: 0%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        position: fixed;
+        width: 100%;
+        top: 0;
       }
-      #link {
-        margin-left: 60px;
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
       }
-      #search{
-         margin-right: -50px;
+
+      nav ul li:last-of-type {
+        padding-bottom: 8px;
       }
-      .hero {
-        background-color: rgba(0, 187, 245, 12%);
+
+      nav ul.hidden {
+        display: none;
       }
-      ul img {
-        margin-left: 25px;
-        margin-right: 20px;
-        width: 40px;
-        margin-top: 15px;
+
+      .menu-icon {
+        display: flex;
+        align-items: center;
       }
-      ul h6{
-        display: inline;
-        margin-top: 20px;
-        color: antiquewhite;
+
+      .navbar .login-icon {
+        font-size: 20px;
       }
-      #text {
-        margin-left: 30px;
-        color: antiquewhite;
-      }
-      #logo{
-          height: 30px;
-          width: auto;
-      }
-      
-      
-    </style>
-  </head>
-  <body>
-    <!-- navbar -->
-    <header class="p-3 text-bg-secondary ">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-            <img class="bi me-2 mr-5"  width="150px" height="auto" src="../static/logo.png"></img>
-          </a>
-  
-          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-1 text-white">Home</a></li>
-            <li><a href="#" class="nav-link px-1 text-white">Catalog</a></li>
-            <li><a href="#" class="nav-link px-1 text-white">About</a></li>
-            <li><a href="#" class="nav-link px-1 text-white">Contact</a></li>
-          </ul>
-  
-          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex" role="search">
-            <input type="search" class="form-control-sm form-control bg-white text-bg-dark" placeholder="Search..." aria-label="Search">
-            <button class="btn btn-outline-light d-inline">Search</button>
-          </form>
-  
-          <div class="text-end">
-            <button type="button" class="btn btn-primary me-2" id="login">Login</button>
-            <button type="button" class="btn btn-outline-info text-bg-secondary">History</button>
-          </div>
-        </div>
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgb(0, 0, 0);
+      color: white;
+    }
+
+    .testimonial-card {
+      max-width: 300px;
+      margin: 5px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-card img {
+      width: 250px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 1%;
+      margin-bottom: 20px;
+    }
+
+    .galeri-container {
+      background-color: white;
+      padding: 20px;
+    }
+
+    .hero-container {
+      background-color: rgb(255, 247, 235);
+    }
+  </style>
+  </style>
+</head>
+
+<body>
+
+  <!-- navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top shadow">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
+              <i class="fas fa-user"></i>
+            </a>
+          </li>
+        </ul>
       </div>
-    </header>
-    <!-- navbar end -->
-    <!-- modal -->
-    <div id="modal" class="modal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Login akun sebagai</h5>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-                <button class="btn btn-outline-secondary btn-lg me-md-2" type="button">Pembeli</button>
-                <button class="btn btn-outline-secondary btn-lg" type="button">Admin</button>
-              </div>
+    </div>
+  </nav>
+
+
+  <!-- modal -->
+  <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Login akun sebagai</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
+              <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
             </div>
           </div>
-          <div class="modal-footer">
-            <button id="tutup" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
-    <!-- modal end -->
-    <!-- hero -->
-    <div class="my-3 text-center border-bottom">
-      <h1 class="display-4 mb-3 fw-bold text-body-emphasis">Tentang Kami</h1>
-      <img class="img" src="../static/about.jpg" alt="" style="width: 100%; height: 500px;" />
-      <div class="col-lg-6 mx-auto">
-        <p class="lead mb-4 mt-5">
-          Triples's Branded merupakan usaha yang menjual sepatu preloved
-          berkualitas tinggi. Dengan menyatukan konsumen yang berpikiran sama,
-          Triple's Branded membantu menyediakan sepatu bekas bermerek yang masih
-          layak pakai dengan harga terjangkau. Sepanjang jalan kami telah
-          menyediakan dan menjual ribuan pasang sepatu yang mungkin telah
-          berdebu. Kami berharap dapat memberi pembeli kesempatan untuk memakai
-          beberapa sepatu terbaik dunia dengan harga yang lebih terjangkau.
-        </p>
+  </div>
+  <!-- end  modal -->
+
+  <!-- hero -->
+  <div class="hero-container">
+    <div class="text-center mt-xl-5" style="padding-top: 3px;">
+      <h1 class="text-center bold mt-5 mb-4" style="font-weight: bold;">~Tentang Kami~</h1>
+      <img class="img-fluid" src="../static/about1.png" alt="" style="width: 100%; height: 100%;" />
+
+      <div style="margin-top: 50px;">
+        <div class="row mr-5 ml-5 mb-3 mt-3">
+          <h2 class="featurette-heading fw-normal lh-1"> <span class="text-body-secondary"
+              style="font-style: italic;">Triple’s Branded.</span></h2>
+          <p class="lead mb-4 text">
+            Triples's Branded merupakan usaha yang menjual sepatu preloved berkualitas tinggi. Dengan menyatukan
+            konsumen
+            yang berpikiran sama, Triple's Branded membantu menyediakan sepatu bekas bermerek yang masih layak pakai
+            dengan harga terjangkau. Sepanjang jalan kami telah menyediakan dan menjual ribuan pasang sepatu yang
+            mungkin
+            telah berdebu. Kami berharap dapat memberi pembeli kesempatan untuk memakai beberapa sepatu terbaik dunia
+            dengan harga yang lebih terjangkau.
+          </p>
+        </div>
       </div>
     </div>
-    <!-- hero end -->
-    <!-- footer -->
-    <div class="container-fluid bg-secondary" style="margin-bottom: -30px">
-      <footer
-        class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top"
-      >
+  </div>
+  </div>
+
+  <!-- hero end -->
+
+  <!-- galeri -->
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -35 1440 320">
+    <path fill="white" fill-opacity="1"
+      d="M0,256L26.7,218.7C53.3,181,107,107,160,64C213.3,21,267,11,320,42.7C373.3,75,427,149,480,154.7C533.3,160,587,96,640,90.7C693.3,85,747,139,800,176C853.3,213,907,235,960,213.3C1013.3,192,1067,128,1120,128C1173.3,128,1227,192,1280,197.3C1333.3,203,1387,149,1413,122.7L1440,96L1440,320L1413.3,320C1386.7,320,1333,320,1280,320C1226.7,320,1173,320,1120,320C1066.7,320,1013,320,960,320C906.7,320,853,320,800,320C746.7,320,693,320,640,320C586.7,320,533,320,480,320C426.7,320,373,320,320,320C266.7,320,213,320,160,320C106.7,320,53,320,27,320L0,320Z">
+    </path>
+  </svg>
+
+  <div class="galeri-container">
+    <h1 class="text-center mb-4" style="font-weight: bold;">~Galeri Pembeli Offline~</h1>
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="testimonial-card">
+          <img
+            src="https://scontent.fsub7-1.fna.fbcdn.net/v/t39.30808-6/345667482_988366602332881_3230389434291533834_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeElRjKJLNqxyrbHK4sUW9qEk2dLVno8HKqTZ0tWejwcqij5L4pZbBkOxGer3p_oOPjm00ZzUmHIkp8ivwYr2wiP&_nc_ohc=ocy1bjuOhG4AX84ZhDr&_nc_ht=scontent.fsub7-1.fna&oh=00_AfDTpwnfiLJF0cFNhnIaO0EB3yY4sGKvohQbVlldUDB4jg&oe=648B879B"
+            alt="Testimonial 1">
         
-        <ul class="col-md-4 justify-content-end">
-          <h6>Contact Us: </h6>
-          <img src="../static/instagram.svg" href="#" alt="" />
-          <img src="../static/whatsapp.svg" href="#" alt="" />
-          <img src="../static/facebook.svg" href="#" alt="" />
-        </ul>
-        <p id="text" class="col-md-4 mb-0" >
-          @2022.Triple’sBranded.All rights reserved
-        </p>
-      </footer>
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="testimonial-card">
+          <img
+            src="https://scontent.fsub7-1.fna.fbcdn.net/v/t39.30808-6/345605115_1474031116468920_9115124437579536828_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHA_r6fsCe1bjbdk3K3x7rJ5SDcl3ijYaPlINyXeKNhoziSL8VZTXvytyuX1a4yitP2Ee2bIrmCwYbkn-zKZUMz&_nc_ohc=dIjop3NyZB0AX-hxVKJ&_nc_ht=scontent.fsub7-1.fna&oh=00_AfA1boK0U2zfIZ0FxnlNC1RfYQiEaCmL3QWR8tZv6WuQVA&oe=648B42D1"
+            alt="Testimonial 2">
+        
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="testimonial-card">
+          <img
+            src="https://scontent.fsub7-1.fna.fbcdn.net/v/t39.30808-6/346651142_807059187600482_1043924350013562709_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeEZ-EwAiN4u96GzbjCAF9OHHOtT6V1oWpkc61PpXWhamdldKrZ-6t_wDcVMDo2e09sH8TbnQ9f2gz4CoSO5wrdi&_nc_ohc=AaK_aFI14L4AX_eM_GM&_nc_ht=scontent.fsub7-1.fna&oh=00_AfBVupDLC8iC8nwSWWgEBS3jrxZcVasJFeMWaBWiRn8Qtg&oe=648C0D1F"
+            alt="Testimonial 3">
+        
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="testimonial-card">
+          <img
+            src="https://scontent.fsub7-1.fna.fbcdn.net/v/t39.30808-6/348604266_264670576072860_970885478318504763_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeGV53UHTBQuhaDmzzmB4EMXBjLahtwBUagGMtqG3AFRqNtQzd8onhhA8Cr2J_ai1ktbINzlfYVUvfE4woez-JlX&_nc_ohc=SNfaOr1MXRkAX9vA72g&_nc_ht=scontent.fsub7-1.fna&oh=00_AfAWLwNeZ9djxUfZMIrysRyXsLUUuyLfJFGI7PKMLmoE9g&oe=648BDFD9"
+            alt="Testimonial 4">
+          
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="testimonial-card">
+          <img
+            src="https://scontent.fsub7-1.fna.fbcdn.net/v/t39.30808-6/336378301_525423669670594_1752231170859424016_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHj87A8B_wg3JjmyIsy3MudlnN3BzzQRl6Wc3cHPNBGXnPrC5I9zfLs_f87KFwesMpMPiVbGNq-bs29P9vvr9yN&_nc_ohc=9gzro9JSac4AX_xWJ0t&_nc_ht=scontent.fsub7-1.fna&oh=00_AfCxffkY6L8eRDXtqNqpurLJt841GjFep2A7bVMwnzYEzQ&oe=648AEFBC"
+            alt="Testimonial 5">
+         
+        </div>
+      </div>
+
+      <div class="col-lg-4 col-md-6">
+        <div class="testimonial-card">
+          <img
+            src="https://scontent.fsub7-1.fna.fbcdn.net/v/t39.30808-6/336178120_3483556785304224_211754091724065097_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHI1J116Ej0qinJJ0mkL2to9QR8kwXiQoH1BHyTBeJCgay-B78GUQ39ci3c-s-d7uzyy_4hvnBdHlKXQ3eNtYfB&_nc_ohc=yXcj6TJhHYcAX-mtO2S&_nc_ht=scontent.fsub7-1.fna&oh=00_AfD8YThaI1uWae2KtS6wsxpayC4d5dm8rerge55l03-CGQ&oe=648B6E2F"
+            alt="Testimonial 6">
+          
+        </div>
+      </div>
+
     </div>
-    <!-- footer end -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+  </div>
+
+  <!-- end galeri -->
+
+  </hr>
+  <!-- footer -->
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <h4 style="font-weight: bolder;">Triple’s Branded</h4>
+          <p class="text-body-white" style="font-size: 13px;">Triple’s Branded menjual sepatu branded second
+            yang
+            berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!
+          </p>
+          <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
+            Tropodo,
+            Tropodo, Waru, Sidoarjo</h8>
+        </div>
+        <div class="col-4">
+          <h4 style="font-weight: bolder;">Temukan kami</h4>
+          <ul class="list-unstyled">
+            <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
+          </ul>
+        </div>
+        <div class="col-4">
+          <h4 style="font-weight: bolder;">Links</h4>
+          <ul class="list-unstyled">
+            <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- footer -->
+
+
+  <script>
+    const menuIcon = document.getElementById("menu-icon");
+    const menuList = document.getElementById("menu-list");
+
+    menuIcon.addEventListener("click", () => {
+      menuList.classList.toggle("hidden");
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+
+  <!-- Include the Font Awesome JavaScript library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
 </html>
