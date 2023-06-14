@@ -213,7 +213,7 @@
             background-color: rgb(0, 0, 0);
             color: white;
             height: 60px;
-            
+
         }
 
         .thead-color {
@@ -299,50 +299,26 @@
                     <th class="text-white">Tanggal Pemesanan</th>
                     <th class="text-white">Nama User</th>
                     <th class="text-white">Sepatu </th>
-                    <th class="text-white">Total   </th>
+                    <th class="text-white">Total </th>
                     <th class="text-white">Status Pesanan</th>
                     <th class="text-white">Aksi</th>
                 </tr>
             </thead>
             <tbody>
+                {% for order in orders %}
                 <tr>
-                    <td>2023-06-01</td>
-                    <td>John Doe</td>
-                    <td>Nike</td>
-                    <td>$100</td>
-                    <td>selesia</td>
-                    <td>
-                        <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5">
-                            detail
-                        </a>
-                    </td>
-             
-                </tr>
-                <tr>
-                    <td>2023-06-02</td>
-                    <td>Jane Smith</td>
-                    <td>Adidas</td>
-                    <td>$80</td>
-                    <td>$120</td>
-                    <td>
-                        <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5">
-                            detail
-                        </a>
-                    </td>
-                
-                </tr>
-                <tr>
-                    <td>2023-06-03</td>
-                    <td>David Lee</td>
-                    <td>Puma</td>
-                    <td>$120</td>
-                    <td>$120</td>
+                    <td>{{ order.tanggal }}</td>
+                    <td>{{ order.nama_user }}</td>
+                    <td>{{ order.sepatu }}</td>
+                    <td>{{ order.total }}</td>
+                    <td>{{ order.status }}</td>
                     <td>
                         <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5">
                             detail
                         </a>
                     </td>
                 </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>

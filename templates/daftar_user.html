@@ -295,34 +295,18 @@
                 </tr>
             </thead>
             <tbody class="tbody-color">
+                {% for user in users %}
                 <tr>
-                    <td id="nomor">1</td>
-                    <td>Akmal</td>
-                    <td>akmalcantik</td>
-                    <td>akmalcantik123@gmail.com</td>
-                    <td>08978574865</td>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ user.nama }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.nomor_telepon }}</td>
                 </tr>
+                {% endfor %}
             </tbody>
 
-            <tbody class="tbody-color">
-                <tr>
-                    <td id="nomor">2</td>
-                    <td>Aisyah</td>
-                    <td>eli823</td>
-                    <td>aisyah261@gmail.com</td>
-                    <td>08526731413</td>
-                </tr>
-            </tbody>
-
-            <tbody class="tbody-color">
-                <tr class="">
-                    <td id="nomor">3</td>
-                    <td>Eli</td>
-                    <td>aisyah382</td>
-                    <td>elinasyy123@gmail.com</td>
-                    <td>08276353212</td>
-                </tr>
-            </tbody>
+            
         </table>
     </main>
     <!-- end daftar -->
