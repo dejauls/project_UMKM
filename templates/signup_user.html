@@ -11,6 +11,72 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+
+        function sign_up() {
+            let inputPassword = $('#input-password');
+            let inputPassword2 = $('#input-password2');
+
+            let username = $('#input-username').val();
+            let password = inputPassword.val();
+            let password2 = inputPassword2.val();
+
+            let helpId = $('#help-id');
+
+            if (helpId.hasClass('is-danger')) {
+                alert('Please check your id');
+                return;
+            } else if (!helpId.hasClass('is-success')) {
+                alert('Please double check your id, something is wrong');
+                return;
+            }
+
+            let helpPassword = $('#help-password');
+            let helpPassword2 = $('#help-password2');
+
+            if (password === '') {
+                helpPassword.text('Please enter your password')
+                    .removeClass('is-safe')
+                    .addClass('is-danger');
+                inputPassword.focus();
+                return;
+            } else if (!is_password(password)) {
+                helpPassword.text('For your password, please enter 8-20 English characters, numbers, or the following special characters (!@#$%^&*)')
+                    .removeClass('is-safe')
+                    .addClass('is-danger');
+                inputPassword.focus();
+                return;
+            } else {
+                helpPassword.text('This password can be used!!!')
+                    .removeClass('is-danger')
+                    .addClass('is-success');
+            }
+
+            if (password2 === '') {
+                helpPassword2.text('Please enter your password')
+                    .removeClass('is-safe')
+                    .addClass('is-danger');
+                inputPassword2.focus();
+                return;
+            } else if (password2 !== password) {
+                helpPassword2
+                    .text('Your password do not match')
+                    .removeClass('is-safe')
+                    .addClass('is-danger');
+                inputPassword2.focus();
+                return;
+            } else {
+                helpPassword2
+                    .text('Your password is match!!!')
+                    .removeClass('is-danger')
+                    .addClass('is-success');
+            }
+        }
+    </script>
 
     <style>
         * {
@@ -89,6 +155,14 @@
                                     </div>
 
                                     <div class="form-group mb-3">
+                                        <label
+                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor Telepon
+                                            *</label>
+                                        <input id="inputnomor" type="number" placeholder="Cth: 084328947583"
+                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+                                    <div class="form-group mb-3">
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Email
                                             *</label>
                                         <input id="inputEmail" type="email" placeholder="Cth: nama@triplesbranded.com"
@@ -150,72 +224,7 @@
     </div>
 
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script>
-
-        function sign_up() {
-            let inputPassword = $('#input-password');
-            let inputPassword2 = $('#input-password2');
-
-            let username = $('#input-username').val();
-            let password = inputPassword.val();
-            let password2 = inputPassword2.val();
-
-            let helpId = $('#help-id');
-
-            if (helpId.hasClass('is-danger')) {
-                alert('Please check your id');
-                return;
-            } else if (!helpId.hasClass('is-success')) {
-                alert('Please double check your id, something is wrong');
-                return;
-            }
-
-            let helpPassword = $('#help-password');
-            let helpPassword2 = $('#help-password2');
-
-            if (password === '') {
-                helpPassword.text('Please enter your password')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword.focus();
-                return;
-            } else if (!is_password(password)) {
-                helpPassword.text('For your password, please enter 8-20 English characters, numbers, or the following special characters (!@#$%^&*)')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword.focus();
-                return;
-            } else {
-                helpPassword.text('This password can be used!!!')
-                    .removeClass('is-danger')
-                    .addClass('is-success');
-            }
-
-            if (password2 === '') {
-                helpPassword2.text('Please enter your password')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword2.focus();
-                return;
-            } else if (password2 !== password) {
-                helpPassword2
-                    .text('Your password do not match')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword2.focus();
-                return;
-            } else {
-                helpPassword2
-                    .text('Your password is match!!!')
-                    .removeClass('is-danger')
-                    .addClass('is-success');
-            }
-        }
-    </script>
+   
 </body>
 
 </html>
