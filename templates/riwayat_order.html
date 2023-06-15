@@ -316,32 +316,22 @@
                     </tr>
                 </thead>
                 <tbody id="tbody-box">
+                    {% for order in orders %}
                     <tr>
                         <td>
-                            <div class="product-info">
+                            {{ order.gambar }}
+                            <!-- <div class="product-info">
                                 <img src="https://media.karousell.com/media/photos/products/2020/12/30/sepatu_second_branded_original_1609306594_4400a25e_progressive"
                                     alt="Sepatu 2" class="gambar" id="gambar">
-                            </div>
+                            </div> -->
                         </td>
-                        <td>Reebok</td>
-                        <td>07 Juni 2023</td>
-                        <td>Jakarta</td>
-                        <td>Rp 260.000</td>
-                        <td>Sedang dikirim</td>
+                        <td>{{ order.brand }}</td>
+                        <td>{{ order.tanggal }}</td>
+                        <td>{{ order.alamat }}</td>
+                        <td>{{ order.totalbelanja }}</td>
+                        <td>{{ order.status }}</td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="product-info">
-                                <img src="https://media.karousell.com/media/photos/products/2020/12/30/sepatu_second_branded_original_1609306594_4400a25e_progressive"
-                                    alt="Sepatu 2" class="gambar" id="gambar">
-                            </div>
-                        </td>
-                        <td>Reebok</td> 
-                        <td>07 Juni 2023</td>
-                        <td>Jakarta</td>
-                        <td>Rp 260.000</td>
-                        <td>Sedang dikirim</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
 
                 </tbody>
