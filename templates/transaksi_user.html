@@ -1,178 +1,410 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Home</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Transaksi User</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <!-- Bulma CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+  <!-- Font Awesome CSS -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+  <!-- link bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+    integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+    integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+  <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="costum.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-  <script>
-    $(document).ready(function () {
-      $('#login').click(function () {
-        $('#modal , #bg').fadeIn("slow");
-      });
-      $('#tutup').click(function () {
-        $('#modal , #bg').fadeOut("slow");
-      });
-    });
-  </script>
+
+  <!-- font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
   <style>
-    .container-fluid a {
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    *,
+    html {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    nav {
+      background-color: rgb(255, 255, 255);
+      display: flex;
+      justify-content: space-between;
+      padding: 1rem 2rem;
       color: white;
     }
 
-    #link {
-      margin-left: 60px;
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-  
-    #search {
-      margin-right: -50px;
+    nav ul {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+      font-family: 'DM Sans', sans-serif;
+      /* justify-content: center; */
     }
 
-    ul img {
-      margin-left: 25px;
-      margin-right: 20px;
-      width: 40px;
-      margin-top: 15px;
-
+    nav div img {
+      width: 50px;
     }
 
-    ul h6 {
-      display: inline;
-      margin-top: 20px;
-      color: antiquewhite;
+    nav ul li a {
+      text-decoration: none;
+      font-family: "DM Sans", sans-serif;
+      color: #191919;
+      font-weight: 600;
+      padding: 8px 0;
+      transition: all;
+      transition-duration: 300ms;
+      border-bottom: 1px solid rgba(255, 68, 0, 0);
+      display: flex;
+      justify-content: left;
+      align-items: center;
     }
 
-    #text {
-      margin-left: 30px;
-      color: antiquewhite;
+    nav ul li a:hover {
+      color: brown;
+      border-bottom: 1px solid brown;
     }
 
-    .img img {
+    .menu-icon {
+      /* background-color: tomato; */
+      font-size: 28px;
+      display: none;
+    }
+
+    .btn-hei {
+      background-color: brown;
+      color: white;
+    }
+
+    .btn-hei:hover {
+      background-color: rgb(228, 208, 180);
+    }
+
+    .btn-outline-brown {
+      color: brown;
+      border-color: brown;
+    }
+
+    .btn-outline-brown:hover {
+      background-color: brown;
+      color: white;
+    }
+
+    main {
+      padding-top: 10rem;
+    }
+
+    * {
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .product {
+      margin-bottom: 30px;
+    }
+
+    .product .card-img-top {
+      object-fit: cover;
+      height: 300px;
+    }
+
+    .product .card-text {
+      margin-bottom: 0%;
+    }
+
+    @media only screen and (max-width: 768px) {
+      nav {
+        flex-wrap: wrap;
+        position: fixed;
+        width: 100%;
+        top: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      nav ul li:last-of-type {
+        padding-bottom: 8px;
+      }
+
+      nav ul.hidden {
+        display: none;
+      }
+
+      .menu-icon {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar .login-icon {
+        font-size: 20px;
+      }
+    }
+    #transaksi{
+      margin-top: 100px;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
       width: 100%;
+      background-color: rgb(0, 0, 0);
+      color: white;
     }
 
-    .list p {
-      font-size: 30px;
-      color: black;
-    }
-
-    #btn {
-      width: 100%;
-      font-size: 30px;
-    }
+    
+  </style>
   </style>
 </head>
 
 <body>
+
   <!-- navbar -->
-  <header class="p-3 text-bg-secondary ">
+  <nav class="navbar navbar-expand-lg fixed-top shadow">
     <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <img class="bi me-2 mr-5" width="150px" height="auto" src="../static/logo.png"></img>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-1 text-white">Home</a></li>
-          <li><a href="#" class="nav-link px-1 text-white">Catalog</a></li>
-          <li><a href="#" class="nav-link px-1 text-white">About</a></li>
-          <li><a href="#" class="nav-link px-1 text-white">Contact</a></li>
+      <a class="navbar-brand" href="#">
+        <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-secondary" href="#">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
+              <i class="fas fa-user"></i>
+            </a>
+          </li>
         </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex" role="search">
-          <input type="search" class="form-control-sm form-control bg-white text-bg-dark" placeholder="Search..."
-            aria-label="Search">
-          <button class="btn btn-outline-light d-inline">Search</button>
-        </form>
-
-        <div class="text-end">
-          <button type="button" class="btn btn-primary me-2" id="login">Login</button>
-          <button type="button" class="btn btn-outline-info text-bg-secondary">History</button>
-        </div>
       </div>
     </div>
-  </header>
-  <!-- navbar end -->
+  </nav>
+
+
   <!-- modal -->
-  <div id="modal" class="modal" tabindex="-1">
-    <div class="modal-dialog">
+  <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Login akun sebagai</h5>
+          <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Login akun sebagai</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="d-grid gap-2 d-md-flex justify-content-md-center">
-              <button class="btn btn-outline-secondary btn-lg me-md-2" type="button">Pembeli</button>
-              <button class="btn btn-outline-secondary btn-lg" type="button">Admin</button>
+            <div class="col-md-12 text-center">
+              <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
+              <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button id="tutup" type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
-  <!-- modal end -->
+  <!-- end  modal -->
+
+
   <!-- transaksi -->
-  <div class="container py-5">
+  
+  <div class="container py-5" style="margin-top: 25px;">
     <div class="row align-items-md-stretch">
       <div class="col-md-6">
-        <div class="h-100 text-bg-secondary rounded-3">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
           <div class="img">
             <img src="../static/shoes2.jpg" alt="">
           </div>
           <div class="list px-4 py-4">
-            <p>Jenis Sepatu: </p>
-            <p>Harga Sepatu:</p>
-            <p>Total Belanja:</p>
+            <div class="field">
+              <label class="label">Brand Sepatu:</label>
+              <div class="control">
+                <input class="form-control" type="text" value="Nike Zoom Pegasus Turbo"
+                  aria-label="Disabled input example" disabled readonly>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Harga Sepatu:</label>
+              <div class="control">
+                <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example" disabled
+                  readonly>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Total belanja:</label>
+              <div class="control">
+                <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example" disabled
+                  readonly>
+              </div>
+            </div>
           </div>
-
-
         </div>
       </div>
       <div class="col-md-6">
         <div class="h-100 p-5 bg-body-tertiary border rounded-3">
           <h4>Alamat Pengiriman</h4>
           <div class="list py-2">
-            <p>Nama: </p>
-            <p>No Telepon:</p>
-            <p>Alamat:</p>
+            <div class="field">
+              <label class="label">Nama:</label>
+              <div class="control">
+                <input class="form-control" type="text" value="jhon" aria-label="Disabled input example" disabled
+                  readonly>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Nomor Telepon:</label>
+              <div class="control">
+                <input class="form-control" type="text" value="0897-9907-7709" aria-label="Disabled input example"
+                  disabled readonly>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">Alamat:</label>
+              <div class="control">
+                <input class="form-control" type="text" value="Jakarta" aria-label="Disabled input example" disabled
+                  readonly>
+              </div>
+            </div>
           </div>
           <h4 class="mt-5">Informasi Pengiriman</h4>
           <div class="list py-2">
-            <p>Sudah Dikirim </p>
+            <div class="control">
+              <input class="form-control" type="text" value="Sedang Dikirim" aria-label="Disabled input example"
+                disabled readonly>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <button id="btn" class="btn btn-secondary mt-5 p-2"> Buat Pesanan</button>
+    <div class="d-flex justify-content-center" style="padding-top: 25px;">
+      <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5"
+        style="font-size: 16px; padding: 10px 20px;">Buat Pesanan</a>
+    </div>
   </div>
 
-  <!-- transaksi end -->
-  <!-- footer -->
-  <div class="container-fluid bg-secondary" style="margin-bottom: -30px">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 
-      <ul class="col-md-4 justify-content-end">
-        <h6>Contact Us: </h6>
-        <img src="../static/instagram.svg" href="#" alt="" />
-        <img src="../static/whatsapp.svg" href="#" alt="" />
-        <img src="../static/facebook.svg" href="#" alt="" />
-      </ul>
-      <p id="text" class="col-md-4 mb-0">
-        @2022.Triple’sBranded.All rights reserved
-      </p>
-    </footer>
-    <!-- footer end -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-      crossorigin="anonymous"></script>
+  <!-- transaksi end -->
+
+
+  </hr>
+  <!-- footer -->
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
+    <div class="container">
+      <div class="row">
+        <div class="col-4">
+          <h4 style="font-weight: bolder;">Triple’s Branded</h4>
+          <p class="text-body-white" style="font-size: 13px;">Triple’s Branded menjual sepatu branded second
+            yang
+            berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!
+          </p>
+          <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
+            Tropodo,
+            Tropodo, Waru, Sidoarjo</h8>
+        </div>
+        <div class="col-4">
+          <h4 style="font-weight: bolder;">Temukan kami</h4>
+          <ul class="list-unstyled">
+            <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
+          </ul>
+        </div>
+        <div class="col-4">
+          <h4 style="font-weight: bolder;">Links</h4>
+          <ul class="list-unstyled">
+            <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
+            <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- footer -->
+
+
+  <script>
+    const menuIcon = document.getElementById("menu-icon");
+    const menuList = document.getElementById("menu-list");
+
+    menuIcon.addEventListener("click", () => {
+      menuList.classList.toggle("hidden");
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+
+  <!-- Include the Font Awesome JavaScript library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+
 </body>
 
 </html>

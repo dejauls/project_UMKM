@@ -190,6 +190,47 @@
         }
     </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/catalog_user',
+                data: {},
+                success: function (response) {
+                    let rows = response['catalog'];
+                    for (let i = 0; i < rows.length; i++){
+                        let image = rows[i]['image'];
+                        let brand = rows[i]['brand'];
+                        let harga = rows[i]['harga'];
+                        let ukuran = rows[i]['ukuran'];
+                        let tempt_html = `
+                        <div>
+                            <img src="${image}" alt="Sepatu 2" class="card-img-top">
+                            <div>
+                                <h5 style="margin-top: 1rem;">${brand}</h5>
+                                <p style="margin-bottom: 0.5rem;">${ukuran}</p>
+                                <p style="font-weight: bold;">${harga}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
+                                            data-target="#myModal2">Detail</button>
+                                        <button type="button" class="btn btn-sm btn-hei rounded-5" data-toggle="modal"
+                                            data-target="#myModal" onclick="${id}">Order</button>
+                                    </div>
+                                    <small class="text-body-secondary">9 mins</small>
+                                </div>
+                            </div>`;
+                        $('#list').append(tempt_html);
+                    }
+                }
+            })
+        }
+ 
+    </script>
 </head>
 
 <body>
@@ -206,10 +247,10 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Catalog</a>
@@ -259,65 +300,10 @@
     <div class="container col-xxl-8 px-4 py-5" style="margin-top: 2rem;">
         <div class="row" style="margin-top: 15px;">
 
-            <div class="col-md-4 col-sm-6 product rounded-3">
-                <div>
-                    <img src="../static/Nike zoom.jpeg" alt="Sepatu 2" class="card-img-top">
-                    <div>
-                        <h5 style="margin-top: 1rem;">Nike Zoom Pegasus Turbo</h5>
-                        <p style="margin-bottom: 0.5rem;">Ukuran 44,5</p>
-                        <p style="font-weight: bold;">Rp. 340.000</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2">Detail</button>
-                                <button type="button" class="btn btn-sm btn-hei rounded-5" data-toggle="modal"
-                                    data-target="#myModal">Order</button>
-                            </div>
-                            <small class="text-body-secondary">9 mins</small>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-4 col-sm-6 product rounded-3" id="list">
+                
             </div>
 
-            <div class="col-md-4 col-sm-6 product rounded-3">
-                <div>
-                    <img src="../static/basket.jpeg" alt="Sepatu 2" class="card-img-top">
-                    <div>
-                        <h5 style="margin-top: 1rem;">Nike Basket</h5>
-                        <p style="margin-bottom: 0.5rem;">Ukuran 42,5</p>
-                        <p style="font-weight: bold;">Rp. 450.000</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2">Detail</button>
-                                <button type="button" class="btn btn-sm btn-hei rounded-5" data-toggle="modal"
-                                    data-target="#myModal">Order</button>
-                            </div>
-                            <small class="text-body-secondary">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-sm-6 product rounded-3">
-                <div>
-                    <img src="../static/casual.jpeg" alt="Sepatu 2" class="card-img-top">
-                    <div>
-                        <h5 style="margin-top: 1rem;">Nike Casual</h5>
-                        <p style="margin-bottom: 0.5rem;">Ukuran 45,5</p>
-                        <p style="font-weight: bold;">Rp. 550.000</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2">Detail</button>
-                                <button type="button" class="btn btn-sm btn-hei rounded-5" data-toggle="modal"
-                                    data-target="#myModal">Order</button>
-                            </div>
-                            <small class="text-body-secondary">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
