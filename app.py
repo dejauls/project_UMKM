@@ -71,5 +71,34 @@ def signup_save():
 def login():
     return render_template('login_user.html')
 
+@app.route("/admin_cat")
+def admin_cat():
+    catalogs = db.catalog.find()
+    return render_template('admin_cat.html', catalogs=catalogs)
+
+
+@app.route("/input_cat")
+def input_cat():
+    return render_template("input_cat.html")
+
+@app.route("/input", methods=["POST"])
+def input():
+        brand_receive = request.form["brand_give"]
+        ukuran_receive = request.form["ukuran_give"]
+        harga_receive = request.form["harga_give"]
+        deskripsi_receive = request.form["deskripsi_give"]
+        image_give = request.form["image_give"]
+        doc = {
+        "brand" : brand_receive,
+        "ukuran": ukuran_receive,
+        "harga": harga_receive,
+        "deskripsi": deskripsi_receive,
+        "image": image_give,
+        }
+        db.catalog.insert_one(doc)
+        return jsonify({'result': 'success'})
+
+
+
 if __name__ == '__main__':
     app.run('0.0.0.0',port=5000,debug=True)
