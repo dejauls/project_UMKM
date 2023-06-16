@@ -41,6 +41,12 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -211,14 +217,19 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_cat.html">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/katalog-admin')">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="transaksi_admin.html">Order</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/list_order')">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="daftar-user.html">User</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/daftar_user')">User</a>
                     </li>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-brown rounded-5" type="submit">Search</button>
+                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
                             <i class="fas fa-user"></i>
@@ -259,7 +270,7 @@
     <!-- catalog -->
     <div class="container col-xxl-8 px-4 py-5" style="margin-top: 2rem;">
         <div>
-            <a href="inputkatalog.html" type="button" class="btn btn-hei" style="border-radius: 10px;">
+            <a href="/inputkatalog" type="button" class="btn btn-hei" style="border-radius: 10px;">
                 Update Catalog
             </a>
         </div>
