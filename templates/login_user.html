@@ -43,25 +43,7 @@
     </style>
 
     <script>
-        function login_user() {
-            let username = $("#username").val();
-            let password = $("#password").val();
-            $.ajax({
-                type: "POST",
-                url: "/sign_in",
-                data: {
-                    username_give: username,
-                    password_give: password,
-                },
-                success: function (response) {
-                    if (response["result"] === "success") {
-                        window.location.replace("/hasil");
-                    } else {
-                        alert(response["msg"]);
-                    }
-                },
-            });
-        }
+
 
     </script>
 </head>
@@ -94,7 +76,7 @@
                                                 style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
                                                 *</label>
                                             <input id="inputUsername" type="text" placeholder="Cth: triplesbranded99"
-                                                required="" autofocus="" class="form-control shadow-sm px-4">
+                                                 class="form-control shadow-sm px-4">
                                         </div>
 
                                         <div class="form-group mb-3">
@@ -102,7 +84,7 @@
                                                 style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
                                                 Sandi *</label>
                                             <input id="inputPassword" type="password" placeholder="Kata Sandi"
-                                                required="" autofocus="" class="form-control shadow-sm px-4">
+                                                 class="form-control shadow-sm px-4">
                                         </div>
 
 
@@ -119,7 +101,7 @@
 
 
                                         <p style="font-size: 15px; margin-top: 0.5rem;">Belum punya akun disini?&nbsp <a
-                                                href="/daftar" class="change-form-user text-black"> Daftar di
+                                                href="/sign_up" class="change-form-user text-black"> Daftar di
                                                 sini</a></p>
                                     </form>
 
@@ -146,6 +128,46 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function login_user() {
+            let username = $("#inputUsername").val();
+            let password = $("#inputPassword").val();
+
+            if (username === "") {
+                $("#inputUsername").alert("Masukkan Username!");
+                $("#inputUsername").focus();
+                return;
+            } else {
+                $("#inputUsername").text("");
+            }
+
+            if (password === "") {
+                $("#inputPassword").alert("Masukkan kata sandi!");
+                $("#inputPassword").focus();
+                return;
+            } else {
+                $("#inputPassword").text("");
+            }
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password,
+                },
+                success: function (response) {
+                    if (response["result"] === "success") {
+                        $.cookie("mytoken", response["token"], { path: "/" });
+                        window.location.replace("/catalog");
+                    } else {
+                        alert(response["msg"]);
+                    }
+                },
+            });
+        }
+
+    </script>
 
 </body>
 

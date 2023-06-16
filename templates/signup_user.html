@@ -78,7 +78,7 @@
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nama
                                             Lengkap
                                             *</label>
-                                        <input id="nama" type="text" placeholder="Nama Lengkap" required="" autofocus=""
+                                        <input id="nama" type="text" placeholder="Nama Lengkap"
                                             class="form-control shadow-sm px-4">
                                     </div>
 
@@ -86,31 +86,31 @@
                                         <label
                                             style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
                                             *</label>
-                                        <input id="username" type="text" placeholder="Cth: triplesbranded99" required=""
-                                            autofocus="" class="form-control shadow-sm px-4">
+                                        <input id="username" type="text" placeholder="Cth: triplesbranded99"
+                                            class="form-control shadow-sm px-4">
                                     </div>
 
 
                                     <div class="form-group mb-3">
-                                        <label
-                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor Hp
+                                        <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor
+                                            Hp
                                             *</label>
-                                        <input id="nomorhp" type="number" placeholder="Cth: 081234354556" required=""
-                                            autofocus="" class="form-control shadow-sm px-4">
+                                        <input id="nomorhp" type="number" placeholder="Cth: 081234354556"
+                                            class="form-control shadow-sm px-4">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Email
                                             *</label>
                                         <input id="email" type="email" placeholder="Cth: nama@triplesbranded.com"
-                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                            class="form-control shadow-sm px-4">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
                                             Sandi *</label>
-                                        <input id="password" type="password" placeholder="Kata Sandi" required=""
-                                            autofocus="" class="form-control shadow-sm px-4">
+                                        <input id="password" type="password" placeholder="Kata Sandi"
+                                            autocomplete="current-password" class="form-control shadow-sm px-4">
                                     </div>
 
 
@@ -120,7 +120,7 @@
                                             Kata
                                             Sandi *</label>
                                         <input id="password2" type="password" placeholder="Konfirmasi kata sandi"
-                                            required="" autofocus="" class="form-control shadow-sm px-4"
+                                            autocomplete="current-password" class="form-control shadow-sm px-4"
                                             style="margin-bottom: 1rem;">
                                     </div>
 
@@ -167,6 +167,33 @@
 
     <script>
         function register() {
+            let inputPassword = $('#password');
+            let inputPassword2 = $('#password2');
+
+            let username = $("#username").val();
+            let password = inputPassword.val();
+            let password2 = inputPassword2.val();
+
+            if (password === '') {
+                inputPassword.text('Masukkan kata sandi!')
+                inputPassword.focus();
+            }
+
+            if (password2 === '') {
+                inputPassword2.alert('Masukkan konfirmasi kata sandi!')
+                inputPassword2.focus();
+                return;
+            } else if (password2 !== password) {
+                inputPassword2
+                    .alert('Kata Sandimu tidak sama!')
+                inputPassword2.focus();
+                return;
+            } else {
+                inputPassword2
+                    .alert('Berhasil konfirmasi!')
+            }
+
+
             $.ajax({
                 type: "POST",
                 url: "/sign_up/save",
@@ -179,11 +206,11 @@
                 },
                 success: function (response) {
                     if (response["result"] === "success") {
-                        alert("User registration complete!");
-                        window.location.href = "/login";
+                        alert("Berhasil daftar!");
+                        window.location.replace = "/login";
                     } else {
                         alert(response["msg"]);
-                        window.location.href = "/login";
+                        window.location.replace = "/sign_up";
                     }
                 },
             });
