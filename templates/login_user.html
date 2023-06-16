@@ -42,6 +42,28 @@
         }
     </style>
 
+    <script>
+        function login_user() {
+            let username = $("#username").val();
+            let password = $("#password").val();
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password,
+                },
+                success: function (response) {
+                    if (response["result"] === "success") {
+                        window.location.replace("/hasil");
+                    } else {
+                        alert(response["msg"]);
+                    }
+                },
+            });
+        }
+
+    </script>
 </head>
 
 <body>
@@ -93,11 +115,11 @@
                                         </div>
                                         <button type="submit"
                                             class=" btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
-                                            style="margin-top: 0.5rem;">Masuk</button>
+                                            style="margin-top: 0.5rem;" onclick="login_user()">Masuk</button>
 
 
                                         <p style="font-size: 15px; margin-top: 0.5rem;">Belum punya akun disini?&nbsp <a
-                                                href="signup_user.html" class="change-form-user text-black"> Daftar di
+                                                href="/daftar" class="change-form-user text-black"> Daftar di
                                                 sini</a></p>
                                     </form>
 

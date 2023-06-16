@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -70,35 +73,43 @@
                                     </p>
                                 </div>
 
-
                                 <form>
                                     <div class="form-group mb-3">
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nama
                                             Lengkap
                                             *</label>
-                                        <input id="inputUsername" type="text" placeholder="Nama Lengkap" required=""
-                                            autofocus="" class="form-control shadow-sm px-4">
+                                        <input id="nama" type="text" placeholder="Nama Lengkap" required="" autofocus=""
+                                            class="form-control shadow-sm px-4">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label
                                             style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
                                             *</label>
-                                        <input id="inputUsername" type="text" placeholder="Cth: triplesbranded99"
-                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                        <input id="username" type="text" placeholder="Cth: triplesbranded99" required=""
+                                            autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+
+                                    <div class="form-group mb-3">
+                                        <label
+                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor Hp
+                                            *</label>
+                                        <input id="nomorhp" type="number" placeholder="Cth: 081234354556" required=""
+                                            autofocus="" class="form-control shadow-sm px-4">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Email
                                             *</label>
-                                        <input id="inputEmail" type="email" placeholder="Cth: nama@triplesbranded.com"
+                                        <input id="email" type="email" placeholder="Cth: nama@triplesbranded.com"
                                             required="" autofocus="" class="form-control shadow-sm px-4">
                                     </div>
 
                                     <div class="form-group mb-3">
                                         <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
                                             Sandi *</label>
-                                        <input id="inputPassword" type="password" placeholder="Kata Sandi" required=""
+                                        <input id="password" type="password" placeholder="Kata Sandi" required=""
                                             autofocus="" class="form-control shadow-sm px-4">
                                     </div>
 
@@ -108,7 +119,7 @@
                                             style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Konfirmasi
                                             Kata
                                             Sandi *</label>
-                                        <input id="inputPassword2" type="password" placeholder="Konfirmasi kata sandi"
+                                        <input id="password2" type="password" placeholder="Konfirmasi kata sandi"
                                             required="" autofocus="" class="form-control shadow-sm px-4"
                                             style="margin-bottom: 1rem;">
                                     </div>
@@ -123,11 +134,11 @@
 
                                     <button type="submit"
                                         class=" btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
-                                        style="margin-top: 0.5rem;">Daftar</button>
+                                        style="margin-top: 0.5rem;" onclick="register()">Daftar</button>
 
 
                                     <p style="font-size: 15px; margin-top: 0.5rem;">Sudah punya akun?&nbsp <a
-                                            href="login_user.html" class="change-form-user text-black"> Masuk di
+                                            href="/login" class="change-form-user text-black"> Masuk di
                                             sini</a></p>
 
                                 </form>
@@ -155,65 +166,27 @@
     <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
     <script>
-
-        function sign_up() {
-            let inputPassword = $('#input-password');
-            let inputPassword2 = $('#input-password2');
-
-            let username = $('#input-username').val();
-            let password = inputPassword.val();
-            let password2 = inputPassword2.val();
-
-            let helpId = $('#help-id');
-
-            if (helpId.hasClass('is-danger')) {
-                alert('Please check your id');
-                return;
-            } else if (!helpId.hasClass('is-success')) {
-                alert('Please double check your id, something is wrong');
-                return;
-            }
-
-            let helpPassword = $('#help-password');
-            let helpPassword2 = $('#help-password2');
-
-            if (password === '') {
-                helpPassword.text('Please enter your password')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword.focus();
-                return;
-            } else if (!is_password(password)) {
-                helpPassword.text('For your password, please enter 8-20 English characters, numbers, or the following special characters (!@#$%^&*)')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword.focus();
-                return;
-            } else {
-                helpPassword.text('This password can be used!!!')
-                    .removeClass('is-danger')
-                    .addClass('is-success');
-            }
-
-            if (password2 === '') {
-                helpPassword2.text('Please enter your password')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword2.focus();
-                return;
-            } else if (password2 !== password) {
-                helpPassword2
-                    .text('Your password do not match')
-                    .removeClass('is-safe')
-                    .addClass('is-danger');
-                inputPassword2.focus();
-                return;
-            } else {
-                helpPassword2
-                    .text('Your password is match!!!')
-                    .removeClass('is-danger')
-                    .addClass('is-success');
-            }
+        function register() {
+            $.ajax({
+                type: "POST",
+                url: "/sign_up/save",
+                data: {
+                    username_give: $("#username").val(),
+                    password_give: $("#password").val(),
+                    nama_give: $("#nama").val(),
+                    email_give: $("#email").val(),
+                    nomorhp_give: $("#nomorhp").val(),
+                },
+                success: function (response) {
+                    if (response["result"] === "success") {
+                        alert("User registration complete!");
+                        window.location.href = "/login";
+                    } else {
+                        alert(response["msg"]);
+                        window.location.href = "/login";
+                    }
+                },
+            });
         }
     </script>
 </body>
