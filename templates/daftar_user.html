@@ -32,6 +32,13 @@
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -223,13 +230,13 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_cat.html">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/katalog-admin')">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="transaksi_admin.html">Order</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/list_order')">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="daftar_user.html">User</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/daftar_user')">User</a>
                     </li>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
