@@ -216,6 +216,180 @@
             });
         }
     </script>
+
+    <style>
+        * {
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .login,
+        .image {
+            min-height: 100vh;
+        }
+
+        .bg-image {
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1679113229938-4cd400e97eca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+
+        .btn-hei {
+            background-color: brown;
+            color: white;
+            outline: 1px solid rgb(79, 4, 4);
+
+        }
+
+        .btn-hei:hover {
+            background-color: rgb(228, 208, 180);
+            outline: 1px solid rgb(79, 4, 4);
+        }
+    </style>
+
+    <script>
+        function register() {
+            $.ajax({
+                type: "POST",
+                url: "/sign_up/save",
+                data: {
+                    username_give: $("#username").val(),
+                    password_give: $("#password").val(),
+                    nama_give: $("#nama").val(),
+                    email_give: $("#email").val(),
+                    pass2_give: $("#pass2").val(),
+                },
+                success: function (response) {
+                    if (response["result"] === "success") {
+                        alert("User registration complete!");
+                        window.location.href = "/login";
+                    } else {
+                        alert(response["msg"]);
+                        window.location.href = "/login";
+                    }
+                
+          },
+        });
+      }
+          
+    </script>
+
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row no-gutter">
+
+            <!-- The content half -->
+            <div class="col-md-7 bg-light">
+                <div class="login d-flex align-items-center py-5">
+
+                    <!-- Demo content-->
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-lg-10 col-xl-7 mx-auto">
+                                <div class="text-left mb-0">
+
+                                    <p style="font-size: 25px; margin-bottom: 0.4rem; font-weight: bold;">Buat Sebuah
+                                        Akun
+                                    </p>
+                                    <p style="font-size: 15px; margin-bottom: 1rem;"> Dengan membuat akun, kamu bisa
+                                        melakukan transaksi cepat! Yuk daftar sekarang.
+                                    </p>
+                                </div>
+
+
+                                <form>
+                                    <div class="form-group mb-3">
+                                        <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nama
+                                            Lengkap
+                                            *</label>
+                                        <input id="nama" type="text" placeholder="Nama Lengkap"
+                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label
+                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
+                                            *</label>
+                                        <input id="username" type="text" placeholder="Cth: triplesbranded99"
+                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label
+                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor Telepon
+                                            *</label>
+                                        <input id="inputnomor" type="number" placeholder="Cth: 084328947583"
+                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Email
+                                            *</label>
+                                        <input id="email" type="email" placeholder="Cth: nama@triplesbranded.com"
+                                            required="" autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+                                    <div class="form-group mb-3">
+                                        <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
+                                            Sandi *</label>
+                                        <input id="password" type="password" placeholder="Kata Sandi" required=""
+                                            autofocus="" class="form-control shadow-sm px-4">
+                                    </div>
+
+
+                                    <div class="form-group mb-3">
+                                        <label
+                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Konfirmasi
+                                            Kata
+                                            Sandi *</label>
+                                        <input id="pass2" type="password" placeholder="Konfirmasi kata sandi" required=""
+                                            autofocus="" class="form-control shadow-sm px-4" style="margin-bottom: 1rem;">
+                                    </div>
+
+
+                                    <div class="custom-control custom-checkbox mb-3"
+                                        style="font-size: 14px; font-weight: bold; margin-top: 2rem;">
+                                        <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                        &nbsp Dengan mendaftar, saya menyetujui Syarat dan Ketentuan serta Kebijakan
+                                        Privasi yang berlaku
+                                    </div>
+
+                                    <button type="submit"
+                                        class=" btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
+                                        style="margin-top: 0.5rem;" onclick="register()">Daftar</button>
+
+
+                                    <p style="font-size: 15px; margin-top: 0.5rem;">Sudah punya akun?&nbsp <a
+                                            href="login_user.html" class="change-form-user text-black"> Masuk di
+                                            sini</a></p>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div><!-- End -->
+
+                </div>
+            </div><!-- End -->
+
+            <!-- The image half -->
+            <div class="col-md-5 d-none d-md-flex bg-image align-items-center">
+                <div class="col-md-12 mt-xl-5 text-center">
+
+                </div>
+                <img src="your-image.jpg" alt="Your Image" style="width: 20%; height: auto;">
+            </div><!-- End -->
+
+        </div>
+    </div>
+
+
+   
 </body>
 
 </html>

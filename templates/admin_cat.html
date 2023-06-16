@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin_Cat</title>
+    <title> Admin Katalog || Triple's Branded </title>
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
     <!-- Font Awesome CSS -->
@@ -211,13 +211,13 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_cat.html">Catalog</a>
+                        <a class="nav-link" href="/admin_cat">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="transaksi_admin.html">Order</a>
+                        <a class="nav-link" href="/transaksi_admin">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="daftar_user.html">User</a>
+                        <a class="nav-link" href="/daftar_user">User</a>
                     </li>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
@@ -264,24 +264,25 @@
     <!-- catalog -->
     <div class="container col-xxl-8 px-4 py-5" style="margin-top: 2rem;">
         <div>
-            <a href="inputkatalog.html" type="button" class="btn btn-hei" style="border-radius: 10px;">
+            <a href="/input_cat" type="button" class="btn btn-hei" style="border-radius: 10px;">
                 Update Catalog
             </a>
         </div>
         <div class="row" style="margin-top: 15px;">
+            {% for catalog in catalogs %}
 
             <div class="col-md-4 product rounded-3">
                 <div>
-                    <img src="../static/Nike zoom.jpeg" alt="Sepatu 2" class="card-img-top">
+                    <img src="/static/{{ catalog.image }}" alt="Sepatu" class="card-img-top">
                     <div>
-                        <h5 style="margin-top: 1rem;">Nike Zoom Pegasus Turbo</h5>
-                        <p style="margin-bottom: 0.5rem;">Ukuran 44,5</p>
-                        <p style="font-weight: bold;">Rp. 340.000</p>
+                        <h5 style="margin-top: 1rem;">{{ catalog.brand }}</h5>
+                        <p style="margin-bottom: 0.5rem;">{{ catalog.ukuran }}</p>
+                        <p style="font-weight: bold;">{{ catalog.harga }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
                                     data-target="#myModal2">Detail</button>
-                                <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5">
+                                <a href="/edit_cat" type="button" class="btn btn-sm btn-hei rounded-5">
                                     Edit
                                 </a>
                             </div>
@@ -291,49 +292,7 @@
                 </div>
             </div>
 
-
-            <div class="col-md-4 product rounded-3">
-                <div>
-                    <img src="../static/Nike zoom.jpeg" alt="Sepatu 2" class="card-img-top">
-                    <div>
-                        <h5 style="margin-top: 1rem;">Nike Zoom Pegasus Turbo</h5>
-                        <p style="margin-bottom: 0.5rem;">Ukuran 44,5</p>
-                        <p style="font-weight: bold;">Rp. 340.000</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2">Detail</button>
-                                <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5">
-                                    Edit
-                                </a>
-                            </div>
-                            <small class="text-body-secondary">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 product rounded-3">
-                <div>
-                    <img src="../static/basket.jpeg" alt="Sepatu 2" class="card-img-top">
-                    <div>
-                        <h5 style="margin-top: 1rem;">Nike Basket</h5>
-                        <p style="margin-bottom: 0.5rem;">Ukuran 45,5</p>
-                        <p style="font-weight: bold;">Rp. 550.000</p>
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2">Detail</button>
-                                <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5">
-                                    Edit
-                                </a>
-                            </div>
-                            <small class=" text-body-secondary">9 mins</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            {% endfor %}
 
         </div>
 
@@ -347,6 +306,13 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
+
+                            <div class="field">
+                                <label class="label"></label>
+                                <div class="control">
+                                    <img src="../static/Nike zoom.jpeg" alt="Foto Sepatu" width="100%" height="100%">
+                                </div>
+                            </div>
                             <div class="field">
                                 <label class="label">Brand Sepatu:</label>
                                 <div class="control">
@@ -384,12 +350,12 @@
                             <button type="button" class="btn btn-hei" data-dismiss="modal">Tutup</button>
                         </div>
                     </div>
+                </article>
             </div>
-            </article>
+
         </div>
     </div>
-    </div>
-    </div>
+
 
     <div class="d-flex justify-content-center">
         <button type="button" class="btn btn-hei" style="border-radius: 10px;">
