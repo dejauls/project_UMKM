@@ -69,9 +69,33 @@ def login_admin():
 def admin():
     return render_template('login_admin.html')
 
-@app.route('/admin/catalog')
-def admin_catalog():
-    return render_template('admin_cat.html')    
+@app.route("/admin/catalog")
+def admin_cat():
+    catalogs = db.catalog.find()
+    return render_template('admin_cat.html', catalogs=catalogs)
+
+
+@app.route("/input_cat")
+def input_cat():
+    return render_template("input_cat.html")
+
+@app.route("/inputkatalog", methods=["POST"])
+def input():
+        brand_receive = request.form["brand_give"]
+        ukuran_receive = request.form["ukuran_give"]
+        harga_receive = request.form["harga_give"]
+        deskripsi_receive = request.form["deskripsi_give"]
+        image_give = request.form["image_give"]
+        doc = {
+        "brand" : brand_receive,
+        "ukuran": ukuran_receive,
+        "harga": harga_receive,
+        "deskripsi": deskripsi_receive,
+        "image": image_give,
+        }
+        db.catalog.insert_one(doc)
+        return jsonify({'result': 'success'})
+
 
 
 @app.route('/admin/daftar_user')
@@ -86,11 +110,6 @@ def user():
 @app.route('/admin/list_order')
 def orderan():
     return render_template('transaksi_admin.html')
-
-
-@app.route('/inputkatalog')
-def inputkatalog():
-    return render_template('inputkatalog.html')
 
 
 @app.route("/sign_in", methods=["POST"])

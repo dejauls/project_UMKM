@@ -41,6 +41,12 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+    
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -211,13 +217,13 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin_cat">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin/catalog')">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/transaksi_admin">Order</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin/list_order')">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/daftar_user">User</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin/daftar_user')">User</a>
                     </li>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
