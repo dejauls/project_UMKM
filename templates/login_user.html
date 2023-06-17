@@ -12,6 +12,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function login_user() {
+            let username = $("#inputUsername").val();
+            let password = $("#inputPassword").val();
+
+            if (username === "") {
+                alert("Masukkan Username!");
+                $("#inputUsername").focus();
+                return;
+            }
+
+            if (password === "") {
+                alert("Masukkan kata sandi!");
+                $("#inputPassword").focus();
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/sign_in",
+                data: {
+                    username_give: username,
+                    password_give: password,
+                },
+                success: function (response) {
+                    if (response["result"] === "success") {
+                        $.cookie("mytoken", response["token"], { path: "/" });
+                        window.location.replace("/catalog");
+                    } else {
+                        alert(response["msg"]);
+                    }
+                },
+            });
+        }
+    </script>
+
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -49,126 +89,59 @@
 </head>
 
 <body>
-
     <div class="container-fluid">
-        <form action="/login" method="POST">
+        <form action="/sign_in" method="POST"> 
             <div class="row no-gutter">
-
                 <!-- The content half -->
                 <div class="col-md-7 bg-light">
                     <div class="login d-flex align-items-center py-5">
-
-                        <!-- Demo content-->
+                        <!-- Demo content -->
                         <div class="container">
-
                             <div class="row">
-
                                 <div class="col-lg-10 col-xl-7 mx-auto">
                                     <div class="text-left mb-0">
-
                                         <p style="font-size: 28px; margin-bottom: 1rem; font-weight: bold;">Login</p>
                                     </div>
+                                    <div class="form-group mb-3">
+                                        <label
+                                            style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
+                                            *</label>
+                                        <input id="inputUsername" type="text" placeholder="Cth: triplesbranded99"
+                                            name="username_give" class="form-control shadow-sm px-4">
 
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
+                                            Sandi *</label>
+                                        <input id="inputPassword" type="password" placeholder="Kata Sandi"
+                                            name="password_give" class="form-control shadow-sm px-4">
+                                    </div>
+                                    <div class="custom-control custom-checkbox mb-3">
+                                        <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                        <label for="customCheck1" class="custom-control-label"
+                                            style="font-size: 13px;">Ingat saya</label>
+                                    </div>
+                                    <button type="button"
+                                        class="btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
+                                        style="margin-top: 0.5rem;" onclick="login_user()">Masuk</button>
 
-                                    <form>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
-                                                *</label>
-                                            <input id="inputUsername" type="text" placeholder="Cth: triplesbranded99"
-                                                 class="form-control shadow-sm px-4">
-                                        </div>
-
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
-                                                Sandi *</label>
-                                            <input id="inputPassword" type="password" placeholder="Kata Sandi"
-                                                 class="form-control shadow-sm px-4">
-                                        </div>
-
-
-                                        <div class="custom-control custom-checkbox mb-3">
-                                            <input id="customCheck1" type="checkbox" checked
-                                                class="custom-control-input">
-                                            <label for="customCheck1" class="custom-control-label"
-                                                style="font-size: 13px;">Ingat saya</label>
-
-                                        </div>
-                                        <button type="submit"
-                                            class=" btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
-                                            style="margin-top: 0.5rem;" onclick="login_user()">Masuk</button>
-
-
-                                        <p style="font-size: 15px; margin-top: 0.5rem;">Belum punya akun disini?&nbsp <a
-                                                href="/sign_up" class="change-form-user text-black"> Daftar di
-                                                sini</a></p>
-                                    </form>
-
+                                    <p style="font-size: 15px; margin-top: 0.5rem;">Belum punya akun disini?&nbsp;<a
+                                            href="/sign_up" class="change-form-user text-black">Daftar di sini</a></p>
                                 </div>
                             </div>
-                        </div><!-- End -->
-
+                        </div>
                     </div>
-                </div><!-- End -->
-
+                </div>
                 <!-- The image half -->
                 <div class="col-md-5 d-none d-md-flex bg-image align-items-center">
                     <div class="col-md-12 mt-xl-5 text-center">
-
+                        <!-- Image content -->
                     </div>
                     <img src="your-image.jpg" alt="Your Image" style="width: 20%; height: auto;">
                 </div><!-- End -->
-
             </div>
         </form>
     </div>
-
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script>
-        function login_user() {
-            let username = $("#inputUsername").val();
-            let password = $("#inputPassword").val();
-
-            if (username === "") {
-                $("#inputUsername").alert("Masukkan Username!");
-                $("#inputUsername").focus();
-                return;
-            } else {
-                $("#inputUsername").text("");
-            }
-
-            if (password === "") {
-                $("#inputPassword").alert("Masukkan kata sandi!");
-                $("#inputPassword").focus();
-                return;
-            } else {
-                $("#inputPassword").text("");
-            }
-            $.ajax({
-                type: "POST",
-                url: "/sign_in",
-                data: {
-                    username_give: username,
-                    password_give: password,
-                },
-                success: function (response) {
-                    if (response["result"] === "success") {
-                        $.cookie("mytoken", response["token"], { path: "/" });
-                        window.location.replace("/catalog");
-                    } else {
-                        alert(response["msg"]);
-                    }
-                },
-            });
-        }
-
-    </script>
-
 </body>
 
 </html>

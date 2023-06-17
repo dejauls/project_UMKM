@@ -27,25 +27,6 @@ def home():
 def about():
     return render_template('about.html')
     
-    
-    
-@app.route('/login',methods=['GET'])
-def login():
-    token_receive = request.cookies.get(TOKEN_KEY)
-    try : 
-        payload = jwt.decode(
-            token_receive,
-            SECRET_KEY,
-            algorithms=['HS256']
-        )
-        user_info = db.users.find_one({"username": payload["username"]})
-        return render_template('home.html', user_info=user_info)
-    except jwt.ExpiredSignatureError:
-        msg = 'You token has expired'
-        return redirect(url_for('login', msg=msg))
-    except jwt.exceptions.DecodeError:
-        msg = 'There was a promblem logging you in'
-        return redirect(url_for('login', msg=msg))   
 
 @app.route('/catalog')
 def catalog():
@@ -115,38 +96,6 @@ def orderan():
     return render_template('transaksi_admin.html', orders=orders)
 
 
-@app.route("/sign_in", methods=["POST"])
-def sign_in():
-    username_receive = request.form["username_give"]
-    password_receive = request.form["password_give"]
-    pw_hash = hashlib.sha256(password_receive.encode("utf-8")).hexdigest()
-    result = db.users.find_one(
-        {
-            "username": username_receive,
-            "password": pw_hash,
-        }
-    )
-    if result:
-        payload = {
-            "id": username_receive,
-            "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-
-        return jsonify(
-            {
-                "result": "success",
-                "token": token,
-            }
-        )
-    else:
-        return jsonify(
-            {
-                "result": "fail",
-                "msg": "Username atau password kamu tidak ditemukan!",
-            }
-        )
-
 @app.route("/sign_up")
 def sign_up():
     return render_template('signup_user.html')
@@ -167,7 +116,33 @@ def signup_save():
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
+@app.route("/sign_in", methods=["POST"])
+def sign_in():
+    if request.method == "POST":
+        username_receive = request.form.get("username_give")
+        password_receive = request.form.get("password_give")
+        pw_hash = hashlib.sha256(password_receive.encode("utf-8")).hexdigest()
+        result = db.users.find_one(
+            {
+                "username": username_receive,
+                "password": pw_hash,
+            }
+        )
 
+        if result:
+            payload = {
+                "username": username_receive,
+                "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
+            }
+            token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+            response = make_response(render_template('home.html', user_info=result))
+            response.set_cookie(TOKEN_KEY, token)
+
+            return response
+
+        return jsonify({"result": "fail", "msg": "Username atau password kamu tidak ditemukan!"})
+    else:
+        return jsonify({"result": "fail", "msg": "Metode tidak diizinkan."}), 405
 
 # untuk page input katalog
             #def insert_katalog(jenis, ukuran, harga, deskripsi):
