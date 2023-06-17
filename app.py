@@ -28,6 +28,7 @@ def about():
     return render_template('about.html')
     
     
+    
 @app.route('/login',methods=['GET'])
 def login():
     token_receive = request.cookies.get(TOKEN_KEY)
@@ -221,20 +222,6 @@ def signup_save():
             #else:
                 #katalog = get_katalog()
                 #return render_template('editkatalog.html', katalog=katalog)
-
-
-#untuk page transaksi admin
-        #def get_orders():
-            #client = MongoClient('mongodb://localhost:27017/')  # Ganti URL MongoDB sesuai konfigurasi Anda
-            #db = client['order_database']  # Ganti nama database sesuai dengan nama database Anda
-            #collection = db['orders']  # Ganti nama koleksi sesuai dengan nama koleksi Anda
-            #orders = collection.find()
-            #return orders
-
-        #@app.route('/')
-        #def home():
-            #orders = get_orders()
-            #return render_template('index.html', orders=orders)
 
 
 if __name__ == '__main__':
