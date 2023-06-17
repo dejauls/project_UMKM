@@ -22,6 +22,10 @@ SECRET_KEY = 'SAYA'
 @app.route('/',methods=['GET'])
 def home():
     return render_template('home.html')
+
+@app.route('/about',methods=['GET'])
+def about():
+    return render_template('about.html')
     
     
 @app.route('/login',methods=['GET'])
