@@ -32,6 +32,16 @@
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+
+        function scrollToFooter() {
+            const footer = document.getElementById('footer');
+            footer.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -178,15 +188,11 @@
 
         .gambar {
             width: 300px;
-            /* atur lebar gambar sesuai kebutuhan */
             height: 250px;
-            /* atur tinggi gambar sesuai kebutuhan */
             object-fit: cover;
-            /* mengatur bagaimana gambar diresize agar tetap sesuai rasio aslinya */
 
         }
 
-        /* Responsiveness */
         @media (max-width: 768px) {
             .navbar-nav {
                 margin: 0;
@@ -251,16 +257,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
+                        <a class="nav-link" href="/about" onclick="navigateTo('/about')">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="javascript:void(0);" onclick="scrollToFooter()">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
@@ -304,7 +310,7 @@
     <!-- riwayat pesanan -->
     <div class="container-fluid" style="margin-top: 100px;">
         <div class="wrapper">
-        {% for riwayat in riwayat %}
+            {% for riwayat in riwayat %}
             <table class="table table-striped table-bordered">
                 <thead class="thead-secondary">
                     <tr>
