@@ -98,51 +98,7 @@
       box-sizing: border-box;
     }
 
-    nav {
-      background-color: rgb(255, 255, 255);
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      color: white;
-    }
 
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    nav ul {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      list-style: none;
-      font-family: 'DM Sans', sans-serif;
-      /* justify-content: center; */
-    }
-
-    nav div img {
-      width: 50px;
-    }
-
-    nav ul li a {
-      text-decoration: none;
-      font-family: "DM Sans", sans-serif;
-      color: #191919;
-      font-weight: 600;
-      padding: 8px 0;
-      transition: all;
-      transition-duration: 300ms;
-      border-bottom: 1px solid rgba(255, 68, 0, 0);
-      display: flex;
-      justify-content: left;
-      align-items: center;
-    }
-
-    nav ul li a:hover {
-      color: brown;
-      border-bottom: 1px solid brown;
-    }
 
     .menu-icon {
       /* background-color: tomato; */
@@ -248,243 +204,142 @@
   </style>
 </head>
 
-<body>
+ <body>
 
 
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top shadow">
-    <nav class="navbar navbar-expand-lg fixed-top shadow">
-      <div class="container">
-        <a class="navbar-brand" href="#">
-          <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">About</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">Catalog</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-secondary" href="#">Contact</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
-                <i class="fas fa-user"></i>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-
-  </nav>
-
-
-  <!-- modal -->
-  <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Login akun sebagai</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
-              <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
+  <!-- transaksi -->
+  <div class="container py-5" style="margin-top: 25px;">
+    <div class="row align-items-md-stretch">
+      <div class="col-md-6">
+        <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+          <div class="h-100 p-5 bg-body-tertiary border rounded-3">
+            <div class="img">
+              <img src="../static/shoes2.jpg" alt="">
+            </div>
+            <div class="list px-4 py-4">
+              <div class="field">
+                <label class="label">Brand Sepatu:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Nike Zoom Pegasus Turbo"
+                    aria-label="Disabled input example" disabled readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Harga Sepatu:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
+                    disabled readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Total belanja:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
+                    disabled readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Brand Sepatu:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Nike Zoom Pegasus Turbo"
+                    aria-label="Disabled input example" disabled readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Harga Sepatu:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
+                    disabled readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Total belanja:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
+                    disabled readonly>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
-          </div>
         </div>
-      </div>
-    </div>
-    <!-- end  modal -->
-
-
-    <!-- transaksi -->
-
-    <div class="container py-5" style="margin-top: 25px;">
-      <div class="row align-items-md-stretch">
         <div class="col-md-6">
           <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-            <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-              <div class="img">
-                <img src="../static/shoes2.jpg" alt="">
-              </div>
-              <div class="list px-4 py-4">
-                <div class="field">
-                  <label class="label">Brand Sepatu:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Nike Zoom Pegasus Turbo"
-                      aria-label="Disabled input example" disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Harga Sepatu:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
-                      disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Total belanja:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
-                      disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Brand Sepatu:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Nike Zoom Pegasus Turbo"
-                      aria-label="Disabled input example" disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Harga Sepatu:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
-                      disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Total belanja:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Rp. 340.000" aria-label="Disabled input example"
-                      disabled readonly>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-              <h4>Alamat Pengiriman</h4>
-              <div class="list py-2">
-                <div class="field">
-                  <label class="label">Nama:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="jhon" aria-label="Disabled input example" disabled
-                      readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Nomor Telepon:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="0897-9907-7709" aria-label="Disabled input example"
-                      disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Alamat:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Jakarta" aria-label="Disabled input example" disabled
-                      readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Nama:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="jhon" aria-label="Disabled input example" disabled
-                      readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Nomor Telepon:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="0897-9907-7709" aria-label="Disabled input example"
-                      disabled readonly>
-                  </div>
-                </div>
-                <div class="field">
-                  <label class="label">Alamat:</label>
-                  <div class="control">
-                    <input class="form-control" type="text" value="Jakarta" aria-label="Disabled input example" disabled
-                      readonly>
-                  </div>
-                </div>
-              </div>
-              <h4 class="mt-5">Informasi Pengiriman</h4>
-              <div class="list py-2">
+            <h4>Alamat Pengiriman</h4>
+            <div class="list py-2">
+              <div class="field">
+                <label class="label">Nama:</label>
                 <div class="control">
-                  <input class="form-control" type="text" value="Sedang Dikirim" aria-label="Disabled input example"
-                    disabled readonly>
+                  <input class="form-control" type="text" value="jhon" aria-label="Disabled input example" disabled
+                    readonly>
                 </div>
+              </div>
+              <div class="field">
+                <label class="label">Nomor Telepon:</label>
                 <div class="control">
-                  <input class="form-control" type="text" value="Sedang Dikirim" aria-label="Disabled input example"
+                  <input class="form-control" type="text" value="0897-9907-7709" aria-label="Disabled input example"
                     disabled readonly>
                 </div>
               </div>
+              <div class="field">
+                <label class="label">Alamat:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Jakarta" aria-label="Disabled input example" disabled
+                    readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Nama:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="jhon" aria-label="Disabled input example" disabled
+                    readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Nomor Telepon:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="0897-9907-7709" aria-label="Disabled input example"
+                    disabled readonly>
+                </div>
+              </div>
+              <div class="field">
+                <label class="label">Alamat:</label>
+                <div class="control">
+                  <input class="form-control" type="text" value="Jakarta" aria-label="Disabled input example" disabled
+                    readonly>
+                </div>
+              </div>
+            </div>
+            <h4 class="mt-5">Informasi Pengiriman</h4>
+            <div class="list py-2">
+              <div class="control">
+                <input class="form-control" type="text" value="Sedang Dikirim" aria-label="Disabled input example"
+                  disabled readonly>
+              </div>
+              <div class="control">
+                <input class="form-control" type="text" value="Sedang Dikirim" aria-label="Disabled input example"
+                  disabled readonly>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="d-flex justify-content-center" style="padding-top: 25px;">
-          <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5"
-            style="font-size: 16px; padding: 10px 20px;">Buat Pesanan</a>
-        </div>
-        <div class="d-flex justify-content-center" style="padding-top: 25px;">
-          <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5"
-            style="font-size: 16px; padding: 10px 20px;">Buat Pesanan</a>
         </div>
       </div>
+      <div class="d-flex justify-content-center" style="padding-top: 25px;">
+        <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5"
+          style="font-size: 16px; padding: 10px 20px;">Buat Pesanan</a>
+      </div>
+      <div class="d-flex justify-content-center" style="padding-top: 25px;">
+        <a href="editkatalog.html" type="button" class="btn btn-sm btn-hei rounded-5"
+          style="font-size: 16px; padding: 10px 20px;">Buat Pesanan</a>
+      </div>
+    </div>
 
 
-      <!-- transaksi end -->
+    <!-- transaksi end -->
 
 
-      </hr>
-      <!-- footer -->
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
-        <div class="container">
-          <div class="row">
-            <div class="col-4">
-              <h4 style="font-weight: bolder;">Triple’s Branded</h4>
-              <p class="text-body-white" style="font-size: 13px;">Triple’s Branded menjual sepatu branded second
-                yang
-                berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!
-              </p>
-              <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
-                Tropodo,
-                Tropodo, Waru, Sidoarjo</h8>
-            </div>
-            <div class="col-4">
-              <h4 style="font-weight: bolder;">Temukan kami</h4>
-              <ul class="list-unstyled">
-                <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
-                <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
-                <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
-              </ul>
-            </div>
-            <div class="col-4">
-              <h4 style="font-weight: bolder;">Links</h4>
-              <ul class="list-unstyled">
-                <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
-                <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
-                <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
-                <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>  
+    </hr>
+
   </div>
-</body>
+ </body>
 
 </html>
