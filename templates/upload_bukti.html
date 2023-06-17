@@ -45,7 +45,29 @@
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-  
+  <script>
+    const menuIcon = document.getElementById("menu-icon");
+    const menuList = document.getElementById("menu-list");
+
+    menuIcon.addEventListener("click", () => {
+      menuList.classList.toggle("hidden");
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+
+  <!-- Include the Font Awesome JavaScript library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
 
   <script>
    $(document).ready(()=>{
@@ -234,67 +256,7 @@
 
 <body>
 
-  <!-- navbar -->
-  <nav class="navbar navbar-expand-lg fixed-top shadow">
-    <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Catalog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
-              <i class="fas fa-user"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-
-  <!-- modal -->
-  <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Login akun sebagai</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-md-12 text-center">
-              <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
-              <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- end  modal -->
 
 <!-- upload -->
 <div class="container" id="upload">
@@ -326,68 +288,6 @@
 
 
 
-  </hr>
-  <!-- footer -->
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
-          <h4 style="font-weight: bolder;">Triple’s Branded</h4>
-          <p class="text-body-white" style="font-size: 13px;">Triple’s Branded menjual sepatu branded second
-            yang
-            berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!
-          </p>
-          <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
-            Tropodo,
-            Tropodo, Waru, Sidoarjo</h8>
-        </div>
-        <div class="col-4">
-          <h4 style="font-weight: bolder;">Temukan kami</h4>
-          <ul class="list-unstyled">
-            <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
-          </ul>
-        </div>
-        <div class="col-4">
-          <h4 style="font-weight: bolder;">Links</h4>
-          <ul class="list-unstyled">
-            <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- footer -->
-
-
-  <script>
-    const menuIcon = document.getElementById("menu-icon");
-    const menuList = document.getElementById("menu-list");
-
-    menuIcon.addEventListener("click", () => {
-      menuList.classList.toggle("hidden");
-    });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
-
-  <!-- Include the Font Awesome JavaScript library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <!-- Bootstrap Core JavaScript -->
-  <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
