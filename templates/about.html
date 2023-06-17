@@ -45,6 +45,18 @@
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
+
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
+    function scrollToFooter() {
+      const footer = document.getElementById('footer');
+      footer.scrollIntoView({ behavior: 'smooth' });
+    }
+
+  </script>
+
   <style>
     * {
       font-family: 'DM Sans', sans-serif;
@@ -238,16 +250,16 @@
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Home</a>
+            <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">About</a>
+            <a class="nav-link" href="/about" onclick="navigateTo('/about')">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Catalog</a>
+            <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Contact</a>
+            <a class="nav-link" href="javascript:void(0);" onclick="scrollToFooter()">Contact</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
@@ -385,7 +397,8 @@
 
   </hr>
   <!-- footer -->
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
+  <footer id="footer"
+    class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
     <div class="container">
       <div class="row">
         <div class="col-4">
