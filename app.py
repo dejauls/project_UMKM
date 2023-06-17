@@ -109,7 +109,9 @@ def user():
 
 @app.route('/admin/list_order')
 def orderan():
-    return render_template('transaksi_admin.html')
+    collection = db['orders']
+    orders = collection.find()
+    return render_template('transaksi_admin.html', orders=orders)
 
 
 @app.route("/sign_in", methods=["POST"])
