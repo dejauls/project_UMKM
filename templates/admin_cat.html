@@ -46,7 +46,7 @@
             window.location.href = url;
         }
     </script>
-    
+
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -255,7 +255,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="home.html" class="btn btn-outline-brown btn-lg">Log out</a>
+                            <a href="/" class="btn btn-outline-brown btn-lg">Log out</a>
                         </div>
                     </div>
                 </div>
@@ -287,8 +287,9 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2">Detail</button>
-                                <a href="/edit_cat" type="button" class="btn btn-sm btn-hei rounded-5">
+                                    data-target="#myModal2{{ catalog._id }}">Detail</button>
+                                <a href="/edit_cat" type="button" class="btn btn-sm btn-hei rounded-5"
+                                    onclick="get('{{ catalog._id }}')">
                                     Edit
                                 </a>
                             </div>
@@ -298,69 +299,74 @@
                 </div>
             </div>
 
+            <div class="modal fade" id="myModal2{{ catalog._id }}">
+                <div class="modal-dialog">
+
+                    <article class="media">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-bold">Detail</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="field">
+                                    <label class="label"></label>
+                                    <div class="control">
+                                        <img src="/static/{{ catalog.image }}" alt="Foto Sepatu" width="100%"
+                                            height="100%">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Brand Sepatu:</label>
+                                    <div class="control">
+                                        <input class="form-control" type="text" value="{{ catalog.brand }}"
+                                            aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Ukuran Sepatu:</label>
+                                    <div class="control">
+                                        <input class="form-control" type="text" value="{{ catalog.ukuran }}"
+                                            aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Harga Sepatu:</label>
+                                    <div class="control">
+                                        <input class="form-control" type="text" value="{{ catalog.harga }}"
+                                            aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Deskripsi:</label>
+                                    <div class="control">
+                                        <textarea class="form-control" aria-label="Disabled input example" disabled
+                                            readonly>{{ catalog.deskripsi }}</textarea>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-hei" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+            </div>
+
             {% endfor %}
 
         </div>
 
-        <div class="modal fade" id="myModal2">
-            <div class="modal-dialog">
-                {% for catalog in catalogs %}
-                <article class="media">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-bold">Detail</h5>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
 
-                            <div class="field">
-                                <label class="label"></label>
-                                <div class="control">
-                                    <img src="/static/{{ catalog.image }}" alt="Foto Sepatu" width="100%" height="100%">
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="label">Brand Sepatu:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" value="Nike Zoom Pegasus Turbo"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="label">Ukuran Sepatu:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" value="44.5 cm"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="label">Harga Sepatu:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" value="Rp. 340.000"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="label">Deskripsi:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text"
-                                        value="Sepatu ini warna masih oke, cocok digunakan untuk running"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-hei" data-dismiss="modal">Tutup</button>
-                        </div>
-                    </div>
-                </article>
-                {% endfor %}
-            </div>
-
-        </div>
     </div>
 
 
