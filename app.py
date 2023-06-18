@@ -32,20 +32,19 @@ def about():
 def catalog():
     return render_template('cat_user.html')
 
-@app.route('/admin/login', methods=['POST'])
-def login_admin():
-    email = request.form.get("inputEmail")
-    password = request.form.get("inputPassword")
-    doc = {
-        'inputEmail' : email,
-        'inputPassword' : password
-    }
-    db.admin.find_one(doc)
-    if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
-        return redirect('/admin/catalog', message='Berhasil Login!')
-    else:
-        return render_template('login_admin.html', error_message='Email atau password salah!')
-
+# @app.route('/admin/login', methods=['POST'])
+# def login_admin():
+#     email = request.form.get("inputEmail")
+#     password = request.form.get("inputPassword")
+#     doc = {
+#         'inputEmail' : email,
+#         'inputPassword' : password
+#     }
+#     db.admin.find_one(doc)
+#     if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+#         return redirect('/admin/catalog', message='Berhasil Login!')
+#     else:
+#         return render_template('login_admin.html', error_message='Email atau password salah!')
 
 @app.route('/admin')
 def admin():
@@ -95,6 +94,56 @@ def orderan():
     orders = collection.find()
     return render_template('transaksi_admin.html', orders=orders)
 
+@app.route('/admin/login', methods=['POST'])
+def login_admin():
+    email = request.form.get("inputEmail")
+    password = request.form.get("inputPassword")
+    doc = {
+        'inputEmail' : email,
+        'inputPassword' : password
+    }
+    db.admin.find_one(doc)
+    if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
+        return redirect('/admin/catalog', message='Berhasil Login!')
+    else:
+        return render_template('login_admin.html', error_message='Email atau password salah!')
+
+
+@app.route("/login")
+def login():
+    return render_template('login_user.html')
+
+@app.route("/sign_in", methods=["POST"])
+def sign_in():
+    username_receive = request.form["username_give"]
+    password_receive = request.form["password_give"]
+    pw_hash = hashlib.sha256(password_receive.encode("utf-8")).hexdigest()
+    result = db.users.find_one(
+        {
+            "username": username_receive,
+            "password": pw_hash,
+        }
+    )
+    if result:
+        payload = {
+            "id": username_receive,
+            "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+
+        return jsonify(
+            {
+                "result": "success",
+                "token": token,
+            }
+        )
+    else:
+        return jsonify(
+            {
+                "result": "fail",
+                "msg": "Username atau password kamu tidak ditemukan!",
+            }
+        )
 
 @app.route("/sign_up")
 def sign_up():
@@ -106,43 +155,19 @@ def signup_save():
     password_receive = request.form.get('password_give')
     nama_receive = request.form.get('nama_give')
     email_receive = request.form.get('email_give')
+    nohp_receive = request.form.get('nomorhp_give')
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
         "nama": nama_receive,
         "username": username_receive,                               
         "password": password_hash,                                  
-        "email": email_receive,                                         
+        "email": email_receive,
+        "nohp":nohp_receive                                         
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
-@app.route("/sign_in", methods=["POST"])
-def sign_in():
-    if request.method == "POST":
-        username_receive = request.form.get("username_give")
-        password_receive = request.form.get("password_give")
-        pw_hash = hashlib.sha256(password_receive.encode("utf-8")).hexdigest()
-        result = db.users.find_one(
-            {
-                "username": username_receive,
-                "password": pw_hash,
-            }
-        )
 
-        if result:
-            payload = {
-                "username": username_receive,
-                "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
-            }
-            token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-            response = make_response(render_template('home.html', user_info=result))
-            response.set_cookie(TOKEN_KEY, token)
-
-            return response
-
-        return jsonify({"result": "fail", "msg": "Username atau password kamu tidak ditemukan!"})
-    else:
-        return jsonify({"result": "fail", "msg": "Metode tidak diizinkan."}), 405
 
 # untuk page input katalog
             #def insert_katalog(jenis, ukuran, harga, deskripsi):

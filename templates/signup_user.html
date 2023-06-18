@@ -13,90 +13,6 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <script>
-        function register() {
-            let inputPassword = $('#password');
-            let inputPassword2 = $('#password2');
-
-            let username = $("#username").val();
-            let password = inputPassword.val();
-            let password2 = inputPassword2.val();
-
-            if (password === '') {
-                inputPassword.text('Masukkan kata sandi!')
-                inputPassword.focus();
-            }
-
-            if (password2 === '') {
-                inputPassword2.alert('Masukkan konfirmasi kata sandi!')
-                inputPassword2.focus();
-                return;
-            } else if (password2 !== password) {
-                inputPassword2
-                    .alert('Kata Sandimu tidak sama!')
-                inputPassword2.focus();
-                return;
-            } else {
-                inputPassword2
-                    .alert('Berhasil konfirmasi!')
-            }
-
-
-            $.ajax({
-                type: "POST",
-                url: "/sign_up/save",
-                data: {
-                    username_give: $("#username").val(),
-                    password_give: $("#password").val(),
-                    nama_give: $("#nama").val(),
-                    email_give: $("#email").val(),
-                    nomorhp_give: $("#nomorhp").val(),
-                },
-                success: function (response) {
-                    if (response["result"] === "success") {
-                        alert("Berhasil daftar!");
-                        window.location.replace = "/sign_in";
-                    } else {
-                        alert(response["msg"]);
-                        window.location.replace = "/sign_up";
-                    }
-                },
-            });
-        }
-    </script>
-
-
-
-    <script>
-        function register() {
-            $.ajax({
-                type: "POST",
-                url: "/sign_up/save",
-                data: {
-                    username_give: $("#username").val(),
-                    password_give: $("#password").val(),
-                    nama_give: $("#nama").val(),
-                    email_give: $("#email").val(),
-                    pass2_give: $("#pass2").val(),
-                },
-                success: function (response) {
-                    if (response["result"] === "success") {
-                        alert("User registration complete!");
-                        window.location.href = "/sign_in";
-                    } else {
-                        alert(response["msg"]);
-                        window.location.href = "sign_in";
-                    }
-
-                },
-            });
-        }
-
-    </script>
 
 
     <style>
@@ -134,100 +50,162 @@
 
 <body>
 
+    <div class="container-fluid">
+        <div class="row no-gutter">
 
-    </head>
+            <!-- The content half -->
+            <div class="col-md-7 bg-light">
+                <div class="login d-flex align-items-center py-5">
 
-    <body>
-        <div class="container-fluid">
-            <div class="row no-gutter">
-                <!-- The content half -->
-                <div class="col-md-7 bg-light">
-                    <div class="login d-flex align-items-center py-5">
-                        <!-- Demo content -->
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-lg-10 col-xl-7 mx-auto">
-                                    <div class="text-left mb-0">
-                                        <p style="font-size: 25px; margin-bottom: 0.4rem; font-weight: bold;">Buat
-                                            Sebuah
-                                            Akun</p>
-                                        <p style="font-size: 15px; margin-bottom: 1rem;"> Dengan membuat akun, kamu bisa
-                                            melakukan transaksi cepat! Yuk daftar sekarang.</p>
-                                    </div>
-                                    <form>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nama
-                                                Lengkap *</label>
-                                            <input id="nama" type="text" placeholder="Nama Lengkap" required=""
-                                                autofocus="" class="form-control shadow-sm px-4">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
-                                                *</label>
-                                            <input id="username" type="text" placeholder="Cth: triplesbranded99"
-                                                required="" autofocus="" class="form-control shadow-sm px-4">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor
-                                                Telepon *</label>
-                                            <input id="inputnomor" type="number" placeholder="Cth: 084328947583"
-                                                required="" autofocus="" class="form-control shadow-sm px-4">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Email
-                                                *</label>
-                                            <input id="email" type="email" placeholder="Cth: nama@triplesbranded.com"
-                                                required="" autofocus="" class="form-control shadow-sm px-4">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
-                                                Sandi *</label>
-                                            <input id="password" type="password" placeholder="Kata Sandi" required=""
-                                                autofocus="" class="form-control shadow-sm px-4">
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label
-                                                style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Konfirmasi
-                                                Kata Sandi *</label>
-                                            <input id="pass2" type="password" placeholder="Konfirmasi kata sandi"
-                                                required="" autofocus="" class="form-control shadow-sm px-4"
-                                                style="margin-bottom: 1rem;">
-                                        </div>
-                                        <div class="custom-control custom-checkbox mb-3"
-                                            style="font-size: 14px; font-weight: bold; margin-top: 2rem;">
-                                            <input id="customCheck1" type="checkbox" checked
-                                                class="custom-control-input">
-                                            &nbsp;Dengan mendaftar, saya menyetujui Syarat dan Ketentuan serta Kebijakan
-                                            Privasi
-                                            yang berlaku
-                                        </div>
-                                        <button type="button"
-                                            class="btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
-                                            style="margin-top: 0.5rem;" onclick="register()">Daftar</button>
-                                        <p style="font-size: 15px; margin-top: 0.5rem;">Sudah punya akun?&nbsp;<a
-                                                href="/login" class="change-form-user text-black">Masuk di sini</a></p>
-                                    </form>
+                    <!-- Demo content-->
+                    <div class="container">
+
+                        <div class="row">
+
+                            <div class="col-lg-10 col-xl-7 mx-auto">
+                                <div class="text-left mb-0">
+
+                                    <p style="font-size: 25px; margin-bottom: 0.4rem; font-weight: bold;">Buat Sebuah
+                                        Akun
+                                    </p>
+                                    <p style="font-size: 15px; margin-bottom: 1rem;"> Dengan membuat akun, kamu bisa
+                                        melakukan transaksi cepat! Yuk daftar sekarang.
+                                    </p>
                                 </div>
+
+
+                                <div class="form-group mb-3">
+                                    <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nama
+                                        Lengkap
+                                        *</label>
+                                    <input id="nama" type="text" placeholder="Nama Lengkap"
+                                        class="form-control shadow-sm px-4">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Username
+                                        *</label>
+                                    <input id="username" type="text" placeholder="Cth: triplesbranded99"
+                                        class="form-control shadow-sm px-4">
+                                </div>
+
+
+                                <div class="form-group mb-3">
+                                    <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Nomor
+                                        Hp
+                                        *</label>
+                                    <input id="nomorhp" type="number" placeholder="Cth: 081234354556"
+                                        class="form-control shadow-sm px-4">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Email
+                                        *</label>
+                                    <input id="email" type="email" placeholder="Cth: nama@triplesbranded.com"
+                                        class="form-control shadow-sm px-4">
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Kata
+                                        Sandi *</label>
+                                    <input id="password" type="password" placeholder="Kata Sandi"
+                                        class="form-control shadow-sm px-4">
+                                </div>
+
+
+                                <div class="form-group mb-3">
+                                    <label style="font-size: 13px; margin-bottom: 0.5rem; font-weight: bold;">Konfirmasi
+                                        Kata
+                                        Sandi *</label>
+                                    <input id="password2" type="password" placeholder="Konfirmasi kata sandi"
+                                        class="form-control shadow-sm px-4" style="margin-bottom: 1rem;">
+                                </div>
+
+
+                                <div class="custom-control custom-checkbox mb-3"
+                                    style="font-size: 14px; font-weight: bold; margin-top: 2rem;">
+                                    <input id="customCheck1" type="checkbox" checked class="custom-control-input">
+                                    &nbsp Dengan mendaftar, saya menyetujui Syarat dan Ketentuan serta Kebijakan
+                                    Privasi yang berlaku
+                                </div>
+
+                                <button type="button"
+                                    class=" btn btn-block btn-hei mb-2 rounded-pill shadow-sm level-item w-100"
+                                    style="margin-top: 0.5rem;" onclick="register()">Daftar</button>
+
+
+                                <p style="font-size: 15px; margin-top: 0.5rem;">Sudah punya akun?&nbsp <a href="/login"
+                                        class="change-form-user text-black"> Masuk di
+                                        sini</a></p>
+
+
                             </div>
                         </div>
-                    </div>
+                    </div><!-- End -->
+
                 </div>
+            </div><!-- End -->
 
-                <!-- The image half -->
-                <div class="col-md-5 d-none d-md-flex bg-image align-items-center">
-                    <div class="col-md-12 mt-xl-5 text-center">
-                        <!-- Image content -->
-                    </div>
-                    <img src="your-image.jpg" alt="Your Image" style="width: 20%; height: auto;">
-                </div><!-- End -->
-            </div>
+            <!-- The image half -->
+            <div class="col-md-5 d-none d-md-flex bg-image align-items-center">
+                <div class="col-md-12 mt-xl-5 text-center">
+
+                </div>
+                <img src="your-image.jpg" alt="Your Image" style="width: 20%; height: auto;">
+            </div><!-- End -->
+
         </div>
-    </body>
+    </div>
 
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        function register() {
+            console.log("test")
+            let inputPassword = $('#password');
+            let inputPassword2 = $('#password2');
+
+            let username = $("#username").val();
+            let password = inputPassword.val();
+            let password2 = inputPassword2.val();
+            let nama = $("#nama").val();
+            let email = $("#email").val();
+            let nohp = $("#nomorhp").val();
+            if (password === "" || password2 === "" || nama === "" || email === "" | nohp === "") {
+                alert("Inputanmu masih kurang, silahkan periksa kembali!")
+                return;
+            } else if (password != password2) {
+                alert("Password anda harus sama!")
+                return;
+            }
+
+
+            $.ajax({
+                type: "POST",
+                url: "/sign_up/save",
+                data: {
+                    username_give: username,
+                    password_give: password,
+                    nama_give: nama,
+                    email_give: email,
+                    nomorhp_give: nohp,
+                },
+                success: function (response) {
+                    alert("Berhasil registrasi, silahkan login");
+                    window.location.replace("/login");
+                },
+            });
+        }
+    </script>
+
+
+
+
+
+
+</body>
 
 </html>
