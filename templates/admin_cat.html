@@ -41,12 +41,6 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-    <script>
-        function navigateTo(url) {
-            window.location.href = url;
-        }
-    </script>
-
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -201,6 +195,39 @@
         }
     </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script>
+        var currentPage = 1;
+        var perPage = 5;
+
+        function loadData() {
+            $.ajax({
+                url: '/load_data',
+                type: 'POST',
+                data: { page: currentPage, per_page: perPage },
+                success: function (response) {
+                    var data = response.data;
+                    var dataList = document.getElementById('data-list');
+
+                    for (var i = 0; i < data.length; i++) {
+                        var listItem = document.createElement('li');
+                        listItem.innerHTML = data[i];
+                        dataList.appendChild(listItem);
+                    }
+
+                    currentPage++;
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadData();
+
+            $('#load-more-btn').click(function () {
+                loadData();
+            });
+        });
+    </script>
+
 </head>
 
 <body>
@@ -217,13 +244,13 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="navigateTo('/admin/catalog')">Catalog</a>
+                        <a class="nav-link" href="/admin_cat">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="navigateTo('/admin/list_order')">Order</a>
+                        <a class="nav-link" href="/transaksi_admin">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="navigateTo('/admin/daftar_user')">User</a>
+                        <a class="nav-link" href="/daftar_user">User</a>
                     </li>
                     <form class="d-flex" role="search">
                         <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
@@ -255,7 +282,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="/" class="btn btn-outline-brown btn-lg">Log out</a>
+                            <a href="home.html" class="btn btn-outline-brown btn-lg">Log out</a>
                         </div>
                     </div>
                 </div>
@@ -288,8 +315,8 @@
                             <div>
                                 <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
                                     data-target="#myModal2{{ catalog._id }}">Detail</button>
-                                <a href="/edit_cat" type="button" class="btn btn-sm btn-hei rounded-5"
-                                    onclick="get('{{ catalog._id }}')">
+                                <a href="/edit_cat?id={{catalog._id}}" type="button"
+                                    class="btn btn-sm btn-hei rounded-5">
                                     Edit
                                 </a>
                             </div>
@@ -371,7 +398,8 @@
 
 
     <div class="d-flex justify-content-center">
-        <button type="button" class="btn btn-hei" style="border-radius: 10px;">
+        <ul id="data-list"></ul>
+        <button type="button" class="btn btn-hei" style="border-radius: 10px;" id="load-more-btn">
             Load More
         </button>
     </div>

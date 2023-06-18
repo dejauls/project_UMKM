@@ -222,6 +222,61 @@ def signup_save():
             #else:
                 #katalog = get_katalog()
                 #return render_template('editkatalog.html', katalog=katalog)
+                
+
+#punya rangga
+@app.route("/admin_cat")
+def admin_cat():
+    catalogs = db.catalog.find()
+    return render_template('admin_cat.html', catalogs=catalogs,)
+
+
+@app.route("/input_cat")
+def input_cat():
+    return render_template("input_cat.html")
+
+@app.route("/input", methods=["POST"])
+def input():
+        brand_receive = request.form["brand_give"]
+        ukuran_receive = request.form["ukuran_give"]
+        harga_receive = request.form["harga_give"]
+        deskripsi_receive = request.form["deskripsi_give"]
+        image_give = request.form["image_give"]
+        doc = {
+        "brand" : brand_receive,
+        "ukuran": ukuran_receive,
+        "harga": harga_receive,
+        "deskripsi": deskripsi_receive,
+        "image": image_give,
+        }
+        db.catalog.insert_one(doc)
+        return jsonify({'result': 'success'})  
+    
+@app.route("/edit_cat")
+def edit_cat():
+
+    return render_template("edit_cat.html")
+
+@app.route('/update_document', methods=['GET', 'POST'])
+def update_document():
+    if request.method == 'POST':
+        catalog = request.form["_id"]
+        brand_receive = request.form["brand_give"]
+        ukuran_receive = request.form["ukuran_give"]
+        harga_receive = request.form["harga_give"]
+        deskripsi_receive = request.form["deskripsi_give"]
+        image_give = request.form["image_give"]
+        doc = {
+            "brand": brand_receive,
+            "ukuran": ukuran_receive,
+            "harga": harga_receive,
+            "deskripsi": deskripsi_receive,
+            "image": image_give
+        }
+        db.catalog.update_one({"_id": catalog}, {"$set": doc})
+        return redirect('/admin_cat')  
+
+    return render_template('edit_cat.html')
 
 
 if __name__ == '__main__':
