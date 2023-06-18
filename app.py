@@ -14,10 +14,9 @@ MONGODB_CONNECTION_STRING = 'mongodb://jaul:kelompok4@ac-tckcnrv-shard-00-00.iyc
 client = MongoClient(MONGODB_CONNECTION_STRING)
 db = client.umkm
 
-ADMIN_EMAIL = 'admin@triplesbranded.com'
-ADMIN_PASSWORD = 'admin'
 TOKEN_KEY = 'mytoken'
 SECRET_KEY = 'SAYA'
+ADMIN_KEY = 'admintoken'
 
 @app.route('/',methods=['GET'])
 def home():
@@ -26,58 +25,18 @@ def home():
 @app.route('/about',methods=['GET'])
 def about():
     return render_template('about.html')
-    
 
 @app.route('/catalog')
 def catalog():
     return render_template('cat_user.html')
 
-# @app.route('/admin/login', methods=['POST'])
-# def login_admin():
-#     email = request.form.get("inputEmail")
-#     password = request.form.get("inputPassword")
-#     doc = {
-#         'inputEmail' : email,
-#         'inputPassword' : password
-#     }
-#     db.admin.find_one(doc)
-#     if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
-#         return redirect('/admin/catalog', message='Berhasil Login!')
-#     else:
-#         return render_template('login_admin.html', error_message='Email atau password salah!')
-
 @app.route('/admin')
 def admin():
     return render_template('login_admin.html')
 
-@app.route("/admin/catalog")
-def admin_cat():
-    catalogs = db.catalog.find()
-    return render_template('admin_cat.html', catalogs=catalogs)
-
-
-@app.route("/input_cat")
-def input_cat():
-    return render_template("input_cat.html")
-
-@app.route("/inputkatalog", methods=["POST"])
-def input():
-        brand_receive = request.form["brand_give"]
-        ukuran_receive = request.form["ukuran_give"]
-        harga_receive = request.form["harga_give"]
-        deskripsi_receive = request.form["deskripsi_give"]
-        image_give = request.form["image_give"]
-        doc = {
-        "brand" : brand_receive,
-        "ukuran": ukuran_receive,
-        "harga": harga_receive,
-        "deskripsi": deskripsi_receive,
-        "image": image_give,
-        }
-        db.catalog.insert_one(doc)
-        return jsonify({'result': 'success'})
-
-
+@app.route("/login")
+def login():
+    return render_template('login_user.html')
 
 @app.route('/admin/daftar_user')
 def user():
@@ -94,24 +53,39 @@ def orderan():
     orders = collection.find()
     return render_template('transaksi_admin.html', orders=orders)
 
-@app.route('/admin/login', methods=['POST'])
-def login_admin():
-    email = request.form.get("inputEmail")
-    password = request.form.get("inputPassword")
-    doc = {
-        'inputEmail' : email,
-        'inputPassword' : password
-    }
-    db.admin.find_one(doc)
-    if email == ADMIN_EMAIL and password == ADMIN_PASSWORD:
-        return redirect('/admin/catalog', message='Berhasil Login!')
+@app.route("/admin/login", methods=["POST"])
+def admin_login():
+    email_receive = request.form["email_give"]
+    password_receive = request.form["password_give"]
+    pw_hash = hashlib.sha256(password_receive.encode("utf-8")).hexdigest()
+    print(pw_hash)
+    result = db.admin.find_one(
+        {
+            "email": email_receive,
+            "password": pw_hash,
+        }
+    )
+    if result:
+        payload = {
+            "id": email_receive,
+            "exp": datetime.utcnow() + timedelta(seconds=60 * 60 * 24),
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+
+        return jsonify(
+            {
+                "result": "success",
+                "token": token,
+            }
+        )
     else:
-        return render_template('login_admin.html', error_message='Email atau password salah!')
+        return jsonify(
+            {
+                "result": "fail",
+                "msg": "Username atau password kamu tidak ditemukan!",
+            }
+        )
 
-
-@app.route("/login")
-def login():
-    return render_template('login_user.html')
 
 @app.route("/sign_in", methods=["POST"])
 def sign_in():
@@ -227,9 +201,22 @@ def signup_save():
 #punya rangga
 @app.route("/admin_cat")
 def admin_cat():
-    catalogs = db.catalog.find()
-    return render_template('admin_cat.html', catalogs=catalogs,)
-
+    token_receive = request.cookies.get(ADMIN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        catalog = list(db.catalog.find({}))
+        for cat in catalog:
+            cat['_id'] = str(cat['_id'])
+        name_info = db.admin.find_one({
+            'id': payload["id"]})
+        return render_template('admin_cat.html', name_info=name_info, catalog=catalog)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+    
 
 @app.route("/input_cat")
 def input_cat():

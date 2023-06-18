@@ -6,13 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title> Admin Katalog || Triple's Branded </title>
-    <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
     <!-- link bootstrap -->
@@ -22,13 +22,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
         integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
         crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="costum.css" rel="stylesheet" type="text/css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,9 +32,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <style>
         * {
@@ -226,6 +218,11 @@
                 loadData();
             });
         });
+        function logout() {
+            $.removeCookie('admintoken', { path: '/' });
+            alert('Keluar!');
+            window.location.href = '/admin';
+        }
     </script>
 
 </head>
@@ -252,11 +249,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/daftar_user">User</a>
                     </li>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <button class="btn btn-outline-brown rounded-5" type="submit">Search</button>
-                    </form>
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
                             <i class="fas fa-user"></i>
@@ -274,7 +267,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;"></h5>
+                    <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Yakin keluar?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -282,15 +275,16 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="home.html" class="btn btn-outline-brown btn-lg">Log out</a>
+                            <button onclick="logout()" class="btn btn-outline-brown btn-lg">Keluar</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- end  modal -->
 
@@ -302,21 +296,20 @@
             </a>
         </div>
         <div class="row" style="margin-top: 15px;">
-            {% for catalog in catalogs %}
+            {% for cat in catalog %}
 
             <div class="col-md-4 product rounded-3">
                 <div>
-                    <img src="/static/{{ catalog.image }}" alt="Sepatu" class="card-img-top">
+                    <img src="/static/{{ cat.image }}" alt="Sepatu" class="card-img-top">
                     <div>
-                        <h5 style="margin-top: 1rem;">{{ catalog.brand }}</h5>
-                        <p style="margin-bottom: 0.5rem;">{{ catalog.ukuran }}</p>
-                        <p style="font-weight: bold;">{{ catalog.harga }}</p>
+                        <h5 style="margin-top: 1rem;">{{ cat.brand }}</h5>
+                        <p style="margin-bottom: 0.5rem;">{{ cat.ukuran }}</p>
+                        <p style="font-weight: bold;">{{ cat.harga }}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
                                 <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2{{ catalog._id }}">Detail</button>
-                                <a href="/edit_cat?id={{catalog._id}}" type="button"
-                                    class="btn btn-sm btn-hei rounded-5">
+                                    data-target="#myModal2{{ cat._id }}">Detail</button>
+                                <a href="/edit_cat?id={{cat._id}}" type="button" class="btn btn-sm btn-hei rounded-5">
                                     Edit
                                 </a>
                             </div>
@@ -326,7 +319,7 @@
                 </div>
             </div>
 
-            <div class="modal fade" id="myModal2{{ catalog._id }}">
+            <div class="modal fade" id="myModal2{{ cat._id }}">
                 <div class="modal-dialog">
 
                     <article class="media">
@@ -341,14 +334,13 @@
                                 <div class="field">
                                     <label class="label"></label>
                                     <div class="control">
-                                        <img src="/static/{{ catalog.image }}" alt="Foto Sepatu" width="100%"
-                                            height="100%">
+                                        <img src="/static/{{ cat.image }}" alt="Foto Sepatu" width="100%" height="100%">
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label class="label">Brand Sepatu:</label>
                                     <div class="control">
-                                        <input class="form-control" type="text" value="{{ catalog.brand }}"
+                                        <input class="form-control" type="text" value="{{ cat.brand }}"
                                             aria-label="Disabled input example" disabled readonly>
                                     </div>
                                 </div>
@@ -356,7 +348,7 @@
                                 <div class="field">
                                     <label class="label">Ukuran Sepatu:</label>
                                     <div class="control">
-                                        <input class="form-control" type="text" value="{{ catalog.ukuran }}"
+                                        <input class="form-control" type="text" value="{{ cat.ukuran }}"
                                             aria-label="Disabled input example" disabled readonly>
                                     </div>
                                 </div>
@@ -364,7 +356,7 @@
                                 <div class="field">
                                     <label class="label">Harga Sepatu:</label>
                                     <div class="control">
-                                        <input class="form-control" type="text" value="{{ catalog.harga }}"
+                                        <input class="form-control" type="text" value="{{ cat.harga }}"
                                             aria-label="Disabled input example" disabled readonly>
                                     </div>
                                 </div>
@@ -373,7 +365,7 @@
                                     <label class="label">Deskripsi:</label>
                                     <div class="control">
                                         <textarea class="form-control" aria-label="Disabled input example" disabled
-                                            readonly>{{ catalog.deskripsi }}</textarea>
+                                            readonly>{{ cat.deskripsi }}</textarea>
                                     </div>
                                 </div>
 
@@ -458,11 +450,11 @@
 </body>
 <!-- Include the Font Awesome JavaScript library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script> -->
+
+<!-- Bootstrap Core JavaScript  -->
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
 
