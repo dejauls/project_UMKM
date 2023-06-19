@@ -255,6 +255,43 @@
 </head>
 
 <body>
+  <!-- navbar -->
+
+  <nav class="navbar navbar-expand-lg fixed-top shadow">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="navigateTo('/about')">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#footer">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
+              <i class="fas fa-user"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- end navbar -->
+
 
 
 
@@ -279,13 +316,46 @@
       </div>
     </div>
     <div class="container">
-      <button class="btn btn-secondary mt-3 mb-3" type="button">Submit</button>
+      <button class="btn btn-sm btn-hei rounded-5 mt-2 mb-2" type="button">Submit</button>
     </div>
     </div>
 </div>
 
 <!-- upload end -->
+<!-- footer -->
+<footer id="footer"
+class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
+<div class="container">
+  <div class="row">
+    <div class="col-4">
+      <h4 style="font-weight: bolder;">Triple’s Branded</h4>
+      <p class="text-body-white" style="font-size: 13px;">Triple’s Branded menjual sepatu branded second yang
+        berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!</p>
+      <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma Tropodo,
+        Tropodo, Waru, Sidoarjo</h8>
+    </div>
+    <div class="col-4">
+      <h4 style="font-weight: bolder;">Temukan kami</h4>
+      <ul class="list-unstyled">
+        <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
+        <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
+        <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
+      </ul>
+    </div>
+    <div class="col-4">
+      <h4 style="font-weight: bolder;">Links</h4>
+      <ul class="list-unstyled">
+        <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
+        <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
+        <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
+        <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+</footer>
 
+<!-- footer -->
 
 
 
