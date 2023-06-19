@@ -32,6 +32,13 @@
 
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
+
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+    </script>
+
     <style>
         * {
             font-family: 'DM Sans', sans-serif;
@@ -241,14 +248,19 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="admin_cat.html">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin/catalog')">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="transaksi_admin.html">Order</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin/list_order')">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="daftar-user.html">User</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin/daftar_user')">User</a>
                     </li>
+                    <form class="d-flex" role="search">
+                        <input class=" form-control me-2 rounded-5" type="search" placeholder="Search"
+                            aria-label="Search">
+                        <button class="btn btn-outline-brown rounded-5" type="submit">Search</button>
+                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
                             <i class="fas fa-user"></i>

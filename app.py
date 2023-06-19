@@ -188,8 +188,8 @@ def edit_cat():
 
     return render_template("edit_cat.html")
 
-@app.route('/update_document', methods=['GET', 'POST'])
-def update_document():
+@app.route('/update_katalog', methods=['GET', 'POST'])
+def update_katalog():
     if request.method == 'POST':
         catalog = request.form["_id"]
         brand_receive = request.form["brand_give"]
@@ -214,6 +214,15 @@ def detail():
     collection = db.transaksi
     transaksi = list(collection.find())
     return render_template("detail_order.html", transaksi=transaksi)
+
+@app.route("/update_document/<string:id>", methods=['POST'])
+def update_document(id):
+    new_status = request.form.get('status')
+
+    collection = db.transaksi
+    collection.update_one({'_id': id}, {'$set': {'status': new_status}})
+    
+    return redirect('/detail-orderan')
     
 
 if __name__ == '__main__':
