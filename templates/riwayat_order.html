@@ -310,7 +310,6 @@
     <!-- riwayat pesanan -->
     <div class="container-fluid" style="margin-top: 100px;">
         <div class="wrapper">
-            {% for riwayat in riwayat %}
             <table class="table table-striped table-bordered">
                 <thead class="thead-secondary">
                     <tr>
@@ -323,20 +322,19 @@
                     </tr>
                 </thead>
                 <tbody id="tbody-box">
-                    {% for order in orders %}
+                    {% for r in riwayat %}
                     <tr>
                         <td>
-                            {{ order.gambar }}
-                            <!-- <div class="product-info">
-                                <img src="https://media.karousell.com/media/photos/products/2020/12/30/sepatu_second_branded_original_1609306594_4400a25e_progressive"
+                            <div class="product-info">
+                                <img src="/static/{{r.image}}"
                                     alt="Sepatu 2" class="gambar" id="gambar">
-                            </div> -->
+                            </div>
                         </td>
-                        <td>{{ order.brand }}</td>
-                        <td>{{ order.tanggal }}</td>
-                        <td>{{ order.alamat }}</td>
-                        <td>{{ order.totalbelanja }}</td>
-                        <td>{{ order.status }}</td>
+                        <td>{{ r.brand }}</td>
+                        <td>{{ r.tanggal }}</td>
+                        <td>{{ r.alamat }}</td>
+                        <td>{{ r.totalBelanja }}</td>
+                        <td>{{ r.status }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>

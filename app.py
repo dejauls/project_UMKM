@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import hashlib
 from flask import Flask, render_template,jsonify,request,redirect,url_for
 from werkzeug.utils import secure_filename
+from bson import ObjectId
 
 app = Flask(__name__)
 
@@ -164,50 +165,70 @@ def admin_cat():
 
 @app.route("/input_cat")
 def input_cat():
+
     return render_template("input_cat.html")
+    
 
 @app.route("/input", methods=["POST"])
 def input():
-        brand_receive = request.form["brand_give"]
-        ukuran_receive = request.form["ukuran_give"]
-        harga_receive = request.form["harga_give"]
-        deskripsi_receive = request.form["deskripsi_give"]
-        image_give = request.form["image_give"]
-        doc = {
-        "brand" : brand_receive,
-        "ukuran": ukuran_receive,
-        "harga": harga_receive,
-        "deskripsi": deskripsi_receive,
-        "image": image_give,
-        }
-        db.catalog.insert_one(doc)
-        return jsonify({'result': 'success'})  
+    brand_receive = request.form.get('brand_give')
+    ukuran_receive = request.form.get('ukuran_give')
+    harga_receive = request.form.get('harga_give')
+    deskripsi_receive = request.form.get('deskripsi_give')
     
-@app.route("/edit_cat")
+    file_path= ""
+    file = request.files["image_give"]
+    
+    filename = secure_filename(file.filename)
+    extension = filename.split(".")[-1]
+    today = datetime.now()
+    mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+    file_path = f'catalog-{mytime}.{extension}'
+    file.save("./static/coba/" + file_path)
+
+    doc = {
+        'brand' : brand_receive,
+        'ukuran' : ukuran_receive,
+        'harga' : harga_receive,
+        'deskripsi' : deskripsi_receive,
+        "image": file_path
+    }
+    db.catalog.insert_one(doc)
+    return jsonify({'msg': 'Data berhasil disimpan!'})
+    
+@app.route("/edit_cat", methods=['GET', 'POST'])
 def edit_cat():
-
-    return render_template("edit_cat.html")
-
-@app.route('/update_katalog', methods=['GET', 'POST'])
-def update_katalog():
-    if request.method == 'POST':
-        catalog = request.form["_id"]
-        brand_receive = request.form["brand_give"]
-        ukuran_receive = request.form["ukuran_give"]
-        harga_receive = request.form["harga_give"]
-        deskripsi_receive = request.form["deskripsi_give"]
-        image_give = request.form["image_give"]
-        doc = {
+    if request.method == "GET":
+        id = request.args.get("id")
+        data = db.catalog.find_one({"_id":ObjectId(id)})
+        data["_id"] = str(data["_id"])
+        print(data)
+        return render_template("edit_cat.html", data=data)
+    
+    catalog = request.form["id"]
+    brand_receive = request.form["brand"]
+    ukuran_receive = request.form["ukuran"]
+    harga_receive = request.form["harga"]
+    deskripsi_receive = request.form["deskripsi"]
+    file_path= ""
+    file = request.files["image"]
+    
+    if file:
+        filename = secure_filename(file.filename)
+        extension = filename.split(".")[-1]
+        today = datetime.now()
+        mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+        file_path = f'catalog-{mytime}.{extension}'
+        file.save("./static/coba/" + file_path)
+    doc = {
             "brand": brand_receive,
             "ukuran": ukuran_receive,
             "harga": harga_receive,
             "deskripsi": deskripsi_receive,
-            "image": image_give
+            "image": file_path
         }
-        db.catalog.update_one({"_id": catalog}, {"$set": doc})
-        return redirect('/admin_cat')  
-
-    return render_template('edit_cat.html')
+    db.catalog.update_one({"_id":  ObjectId(catalog)}, {"$set": doc})
+    return redirect('/admin_cat')
 
 @app.route("/detail-orderan")
 def detail():
@@ -223,6 +244,105 @@ def update_document(id):
     collection.update_one({'_id': id}, {'$set': {'status': new_status}})
     
     return redirect('/detail-orderan')
+
+@app.route('/order',methods=['GET','POST'])
+def order():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        name_info = db.users.find_one({
+            'username': payload["id"]})
+        print(name_info)
+        id = request.form['id']
+        detail = db.catalog.find_one({'_id':ObjectId(id)})
+        detail['_id'] = str(detail['_id'])
+        tanggal_sekarang = datetime.now()
+        tanggal = tanggal_sekarang.strftime('%d-%m-%Y')
+        return render_template('transaksi_user.html', name_info=name_info, detail=detail, tanggal=tanggal)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+    
+
+@app.route('/pesan', methods=["POST"])
+def pesan():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        totalBelanja = request.form['totalBelanja']
+        status = request.form['status']
+        doc = {
+            "image":request.form['image'],
+            "brand":request.form['brand'],
+            "harga":request.form['harga'],
+            "totalBelanja":request.form['totalBelanja'],
+            "nama":request.form['nama'],
+            "alamat":request.form['alamat'],
+            "nohp":request.form['nohp'],
+            "tanggal":request.form['tanggal'],
+            "status":request.form['status'],   
+        }
+        db.transaksi.insert_one(doc)
+        return render_template('upload_bukti.html', totalBelanja = totalBelanja, status=status)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+
+
+
+@app.route("/upload_bukti", methods=["POST"])
+def upload_bukti():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        file_path= ""
+        file = request.files["image"]
+        
+        if file:
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            today = datetime.now()
+            mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+            file_path = f'bukti-{mytime}.{extension}'
+            file.save("./static/bukti/" + file_path)
+        doc = {
+            "totalBelanja":request.form['totalBelanja'],
+            "image": file_path  
+        }
+        db.bukti.insert_one(doc)
+        return render_template('riwayat_order.html')
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+
+@app.route("/riwayat_order", methods=["GET"])
+def riwayat_order():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        riwayat = list(db.transaksi.find({}))
+        return render_template('riwayat_order.html', riwayat=riwayat)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+
+
     
 
 if __name__ == '__main__':
