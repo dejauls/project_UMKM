@@ -63,19 +63,44 @@
     </style>
     <script>
         function input() {
+            let brand = $('#brand').val();
+            if (!brand) {
+                return alert('jangan lupa untuk memasukan nama brand');
+            }
+            let ukuran = $('#ukuran').val();
+            if (!ukuran) {
+                return alert('jangan lupa untuk memasukan ukuran sepatu');
+            }
+            let harga = $('#harga').val();
+            if (!harga) {
+                return alert('jangan lupa untuk memasukan harga sepatu');
+            }
+            let deskripsi = $('#deskripsi').val();
+            if (!deskripsi) {
+                return alert('jangan lupa untuk memasukan deskripsi sepatu');
+            }
+            let image = $('#image').prop('files')[0];
+            if (!image) {
+                return alert('jangan lupa untuk memasukan gambar sepatu');
+            }
+
+            let form_data = new FormData();
+
+            form_data.append('brand_give', brand);
+            form_data.append('ukuran_give', ukuran);
+            form_data.append('harga_give', harga);
+            form_data.append('deskripsi_give', deskripsi);
+            form_data.append('image_give', image);
+
             $.ajax({
                 type: "POST",
                 url: "/input",
-                data: {
-                    brand_give: $("#brand").val(),
-                    ukuran_give: $("#ukuran").val(),
-                    harga_give: $("#harga").val(),
-                    deskripsi_give: $("#deskripsi").val(),
-                    image_give: $("#image").val(),
-                },
+                data: form_data,
+                contentType: false,
+                processData: false,
                 success: function (response) {
                     {
-                        alert("Data berhasil dimasukan!");
+                        alert(response["msg"]);
                         window.location.href = "/admin_cat";
                     }
                 },

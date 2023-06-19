@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 import hashlib
 from flask import Flask, render_template,jsonify,request,redirect,url_for
 from werkzeug.utils import secure_filename
+from bson import ObjectId
 
 app = Flask(__name__)
 
@@ -164,50 +165,70 @@ def admin_cat():
 
 @app.route("/input_cat")
 def input_cat():
+
     return render_template("input_cat.html")
+    
 
 @app.route("/input", methods=["POST"])
 def input():
-        brand_receive = request.form["brand_give"]
-        ukuran_receive = request.form["ukuran_give"]
-        harga_receive = request.form["harga_give"]
-        deskripsi_receive = request.form["deskripsi_give"]
-        image_give = request.form["image_give"]
-        doc = {
-        "brand" : brand_receive,
-        "ukuran": ukuran_receive,
-        "harga": harga_receive,
-        "deskripsi": deskripsi_receive,
-        "image": image_give,
-        }
-        db.catalog.insert_one(doc)
-        return jsonify({'result': 'success'})  
+    brand_receive = request.form.get('brand_give')
+    ukuran_receive = request.form.get('ukuran_give')
+    harga_receive = request.form.get('harga_give')
+    deskripsi_receive = request.form.get('deskripsi_give')
     
-@app.route("/edit_cat")
+    file_path= ""
+    file = request.files["image_give"]
+    
+    filename = secure_filename(file.filename)
+    extension = filename.split(".")[-1]
+    today = datetime.now()
+    mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+    file_path = f'catalog-{mytime}.{extension}'
+    file.save("./static/coba/" + file_path)
+
+    doc = {
+        'brand' : brand_receive,
+        'ukuran' : ukuran_receive,
+        'harga' : harga_receive,
+        'deskripsi' : deskripsi_receive,
+        "image": file_path
+    }
+    db.catalog.insert_one(doc)
+    return jsonify({'msg': 'Data berhasil disimpan!'})
+    
+@app.route("/edit_cat", methods=['GET', 'POST'])
 def edit_cat():
-
-    return render_template("edit_cat.html")
-
-@app.route('/update_katalog', methods=['GET', 'POST'])
-def update_katalog():
-    if request.method == 'POST':
-        catalog = request.form["_id"]
-        brand_receive = request.form["brand_give"]
-        ukuran_receive = request.form["ukuran_give"]
-        harga_receive = request.form["harga_give"]
-        deskripsi_receive = request.form["deskripsi_give"]
-        image_give = request.form["image_give"]
-        doc = {
+    if request.method == "GET":
+        id = request.args.get("id")
+        data = db.catalog.find_one({"_id":ObjectId(id)})
+        data["_id"] = str(data["_id"])
+        print(data)
+        return render_template("edit_cat.html", data=data)
+    
+    catalog = request.form["id"]
+    brand_receive = request.form["brand"]
+    ukuran_receive = request.form["ukuran"]
+    harga_receive = request.form["harga"]
+    deskripsi_receive = request.form["deskripsi"]
+    file_path= ""
+    file = request.files["image"]
+    
+    if file:
+        filename = secure_filename(file.filename)
+        extension = filename.split(".")[-1]
+        today = datetime.now()
+        mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+        file_path = f'catalog-{mytime}.{extension}'
+        file.save("./static/coba/" + file_path)
+    doc = {
             "brand": brand_receive,
             "ukuran": ukuran_receive,
             "harga": harga_receive,
             "deskripsi": deskripsi_receive,
-            "image": image_give
+            "image": file_path
         }
-        db.catalog.update_one({"_id": catalog}, {"$set": doc})
-        return redirect('/admin_cat')  
-
-    return render_template('edit_cat.html')
+    db.catalog.update_one({"_id":  ObjectId(catalog)}, {"$set": doc})
+    return redirect('/admin_cat')
 
 @app.route("/detail-orderan")
 def detail():
