@@ -61,36 +61,7 @@
             outline: 1px solid rgb(79, 4, 4);
         }
     </style>
-    <script>
-        function edit() {
-            let brand = $("#brand").val();
-            let ukuran = $("#ukuran").val();
-            let harga = $("#harga").val();
-            let deskripsi = $("#deskripsi").val();
-            let image = $("#image").val();
-            var form_data = new FormData();
-            form_data.append("brand_give", brand);
-            form_data.append("ukuran_give", ukuran);
-            form_data.append("harga_give", harga);
-            form_data.append("deskripsi_give", deskripsi);
-            form_data.append("image_give", image);
-            console.log(brand, ukuran, harga, deskripsi, image, form_data);
 
-            $.ajax({
-                type: "POST",
-                url: "/update_katalog",
-                data: form_data,
-                contentType: false,
-                processData: false,
-                success: function (response) {
-                    if (response["result"] === "success") {
-                        alert("Data berhasil diedit!");
-                        window.location.href = "/admin_cat";
-                    }
-                },
-            });
-        }
-    </script>
 </head>
 
 <body>
@@ -100,54 +71,54 @@
                 <article class="media">
                     <div class="media-content">
                         <h3 class="title">Yuk, edit katalog dulu!</h3>
-
-                        <div class="content">
-                            <div class="field">
-                                <label class="label">Brand Sepatu:</label>
-                                <div class="control">
-                                    <input class="input" type="text" placeholder="Cth: Nike, Converse, Adidas, dll"
-                                        id="brand" name="brand">
-
-                                </div>
-                            </div>
-
+                        <form action="/edit_cat" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{{data['_id']}}">
                             <div class="content">
                                 <div class="field">
-                                    <label class="label">Ukuran Sepatu:</label>
+                                    <label class="label">Brand Sepatu:</label>
                                     <div class="control">
-                                        <input class="input" type="text" placeholder="Ukuran sepatu" id="ukuran"
-                                            name="ukuran">
+                                        <input class="input" type="text" placeholder="Cth: Nike, Converse, Adidas, dll"
+                                            id="brand" name="brand" value="{{data.brand}}">
 
                                     </div>
                                 </div>
 
-                                <div class="field">
-                                    <label class="label">Harga:</label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="Harga sepatu" id="harga"
-                                            name="harga">
+                                <div class="content">
+                                    <div class="field">
+                                        <label class="label">Ukuran Sepatu:</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Ukuran sepatu" id="ukuran"
+                                                name="ukuran" value="{{data.ukuran}}">
+
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="field">
-                                    <label class="label">Deskripsi:</label>
-                                    <div class="control">
-                                        <input class="input" type="text" placeholder="Harga sepatu" id="deskripsi"
-                                            name="deskripsi">
+                                    <div class="field">
+                                        <label class="label">Harga:</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Harga sepatu" id="harga"
+                                                name="harga" value="{{data.harga}}">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="field">
-                                    <label for="formFile" class="label">Upload Foto:</label>
-                                    <input class="form-control" type="file" id="image">
-                                </div>
+                                    <div class="field">
+                                        <label class="label">Deskripsi:</label>
+                                        <div class="control">
+                                            <input class="input" type="text" placeholder="Harga sepatu" id="deskripsi"
+                                                name="deskripsi" value="{{data.deskripsi}}">
+                                        </div>
+                                    </div>
 
-                                <div class="submit-button" style="margin-top: 2rem;">
-                                    <button onclick="edit()" type="submit"
-                                        class="btn btn-hei level-item w-100">Edit</button>
-                                </div>
-                                </form>
-                            </div>
+                                    <div class="field">
+                                        <label for="formFile" class="label">Upload Foto:</label>
+                                        <input class="form-control" type="file" name="image">
+                                    </div>
+
+                                    <div class="submit-button" style="margin-top: 2rem;">
+                                        <button type="submit" class="btn btn-hei level-item w-100">Edit</button>
+                                    </div>
+                        </form>
+                    </div>
                 </article>
             </div>
     </section>
