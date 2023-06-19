@@ -142,62 +142,6 @@ def signup_save():
     return jsonify({'result': 'success'})
 
 
-
-# untuk page input katalog
-            #def insert_katalog(jenis, ukuran, harga, deskripsi):
-                #db = connect_mongodb()
-                #collection = db['katalog'] 
-                #katalog = {
-                    #'jenis': jenis,
-                    #'ukuran': ukuran,
-                    #'harga': harga,
-                    #'deskripsi': deskripsi
-                #}
-                #collection.insert_one(katalog)
-
-            # Route untuk halaman edit katalog
-            #@app.route('/editkatalog', methods=['GET', 'POST'])
-            #def edit_katalog():
-                #if request.method == 'POST':
-                    #jenis = request.form.get('jenis')
-                    #ukuran = request.form.get('ukuran')
-                    #harga = request.form.get('harga')
-                    #deskripsi = request.form.get('deskripsi')
-                    #insert_katalog(jenis, ukuran, harga, deskripsi)
-                   #return 'Data berhasil disimpan ke MongoDB!'
-                #return render_template('editkatalog.html')
-
-#untuk pages edit katalog
-        #def get_katalog():
-            #db = connect_mongodb()
-            #collection = db['katalog']  
-            #katalog = collection.find()
-            #return katalog
-
-        # Fungsi untuk mengupdate data katalog 
-        #def update_katalog(jenis, ukuran, harga, deskripsi):
-            #db = connect_mongodb()
-            #collection = db['katalog']  
-            #collection.update_one(
-                #{'jenis': jenis},
-                #{'$set': {'ukuran': ukuran, 'harga': harga, 'deskripsi': deskripsi}}
-            #)
-
-        # Route untuk halaman edit katalog
-        #@app.route('/editkatalog', methods=['GET', 'POST'])
-        #def edit_katalog():
-            #if request.method == 'POST':
-                #jenis = request.form.get('jenis')
-                #ukuran = request.form.get('ukuran')
-                #harga = request.form.get('harga')
-                #deskripsi = request.form.get('deskripsi')
-                #update_katalog(jenis, ukuran, harga, deskripsi)
-                #return 'Data berhasil diupdate di MongoDB!'
-            #else:
-                #katalog = get_katalog()
-                #return render_template('editkatalog.html', katalog=katalog)
-                
-
 #punya rangga
 @app.route("/admin_cat")
 def admin_cat():
@@ -265,6 +209,12 @@ def update_document():
 
     return render_template('edit_cat.html')
 
+@app.route("/detail-orderan")
+def detail():
+    collection = db.transaksi
+    transaksi = list(collection.find())
+    return render_template("detail_order.html", transaksi=transaksi)
+    
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

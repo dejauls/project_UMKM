@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Detail Orderan</title>
 
     <!-- link bootstrap -->
     <link href="bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
@@ -303,21 +303,23 @@
                 </tr>
             </thead>
             <tbody>
-                {% for row in data %}
+                {% for detail in transaksi %}
                 <tr>
-                    <td>{{ row.Brand }}</td>
-                    <td>{{ row.nama }}</td>
-                    <td>{{ row.alamat }}</td>
-                    <td>{{ row.total }}</td>
-                    <td>{{ row.NoHp }}</td>
-                    <td>{{ row.status }}</td>
-                    <td><form method="POST" action="{{ url_for('update_status', id=row['_id']) }}">
-                        <select name="status" onchange="this.form.submit()">
-                            <option value="Belum Dikirim" {% if row['Status Pesanan'] == 'Belum Dikirim' %}selected{% endif %}>Belum Dikirim</option>
-                            <option value="Sudah Dikirim" {% if row['Status Pesanan'] == 'Sudah Dikirim' %}selected{% endif %}>Sudah Dikirim</option>
-                            <option value="Selesai" {% if row['Status Pesanan'] == 'Selesai' %}selected{% endif %}>Selesai</option>
-                        </select>
-                    </form></td>
+                    <td>{{ detail.brand }}</td>
+                    <td>{{ detail.nama }}</td>
+                    <td>{{ detail.alamat }}</td>
+                    <td>{{ detail.totalBelanja }}</td>
+                    <td>{{ detail.nohp }}</td>
+                    <td>{{ detail.status }}</td>
+                    <td>
+                        <form method="POST" action="{{ url_for('update_document', id=detail['_id']) }}">
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="Belum Dikirim" {% if detail['status'] == 'Belum Dikirim' %}selected{% endif %}>Belum Dikirim</option>
+                                <option value="Sudah Dikirim" {% if detail['status'] == 'Sudah Dikirim' %}selected{% endif %}>Sudah Dikirim</option>
+                                <option value="Selesai" {% if detail['status'] == 'Selesai' %}selected{% endif %}>Selesai</option>
+                            </select>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
