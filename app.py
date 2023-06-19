@@ -244,6 +244,105 @@ def update_document(id):
     collection.update_one({'_id': id}, {'$set': {'status': new_status}})
     
     return redirect('/detail-orderan')
+
+@app.route('/order',methods=['GET','POST'])
+def order():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        name_info = db.users.find_one({
+            'username': payload["id"]})
+        print(name_info)
+        id = request.form['id']
+        detail = db.catalog.find_one({'_id':ObjectId(id)})
+        detail['_id'] = str(detail['_id'])
+        tanggal_sekarang = datetime.now()
+        tanggal = tanggal_sekarang.strftime('%d-%m-%Y')
+        return render_template('transaksi_user.html', name_info=name_info, detail=detail, tanggal=tanggal)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+    
+
+@app.route('/pesan', methods=["POST"])
+def pesan():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        totalBelanja = request.form['totalBelanja']
+        status = request.form['status']
+        doc = {
+            "image":request.form['image'],
+            "brand":request.form['brand'],
+            "harga":request.form['harga'],
+            "totalBelanja":request.form['totalBelanja'],
+            "nama":request.form['nama'],
+            "alamat":request.form['alamat'],
+            "nohp":request.form['nohp'],
+            "tanggal":request.form['tanggal'],
+            "status":request.form['status'],   
+        }
+        db.transaksi.insert_one(doc)
+        return render_template('upload_bukti.html', totalBelanja = totalBelanja, status=status)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+
+
+
+@app.route("/upload_bukti", methods=["POST"])
+def upload_bukti():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        file_path= ""
+        file = request.files["image"]
+        
+        if file:
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            today = datetime.now()
+            mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+            file_path = f'bukti-{mytime}.{extension}'
+            file.save("./static/bukti/" + file_path)
+        doc = {
+            "totalBelanja":request.form['totalBelanja'],
+            "image": file_path  
+        }
+        db.bukti.insert_one(doc)
+        return render_template('riwayat_order.html')
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+
+@app.route("/riwayat_order", methods=["GET"])
+def riwayat_order():
+    token_receive = request.cookies.get(TOKEN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        print(payload)
+        riwayat = list(db.transaksi.find({}))
+        return render_template('riwayat_order.html', riwayat=riwayat)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('login'))
+
+
     
 
 if __name__ == '__main__':
