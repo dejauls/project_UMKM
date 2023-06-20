@@ -211,30 +211,10 @@
             menuList.classList.toggle("hidden");
         });
 
-        function get(id) {
-            $.ajax({
-                url: "/catalog_detail?id=" + id,
-                type: "GET",
-                success: function (response) {
-                    detail = response.detail
-                    $('#myModal2').find('.modal-body #brand').val(detail.brand);
-                    $('#myModal2').find('.modal-body #ukuran').val(detail.ukuran);
-                    $('#myModal2').find('.modal-body #harga').val(detail.harga);
-                    $('#myModal2').find('.modal-body #deskripsi').val(detail.deskripsi);
-                    $('#myModal2').find('.modal-body #image').attr('src', '/static/coba/' + detail.image);
-                    $('#myModal2').modal('show');
-
-                },
-                error: function (xhr, status, error) {
-                    console.log('Request failed. Returned status of ' + xhr.status);
-                }
-            });
-        }
-
         function logout() {
             $.removeCookie('mytoken', { path: '/' });
             alert('Keluar!');
-            window.location.href = '/login';
+            window.location.href = '/';
         }
 
     </script>
@@ -317,8 +297,8 @@
                         <p style="font-weight: bold;">{{cat.harga}}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div>
-                                <a type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
-                                    data-target="#myModal2" onclick="get('{{ cat._id }}')">Detail</a>
+                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
+                                    data-target="#myModal2{{ cat._id }}">Detail</button>
                                 <form action="/order" method="POST">
                                     <input type="hidden" name="id" value="{{cat._id}}">
                                     <button type="submit" class="btn btn-sm btn-hei rounded-5 mt-2">Order</button>
@@ -330,73 +310,78 @@
                     </div>
                 </div>
 
+            </div>
 
+            <!-- modal -->
+
+            <div class="modal fade" id="myModal2{{ cat._id }}">
+                <div class="modal-dialog">
+
+                    <article class="media">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-bold">Detail</h5>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+                            <div class="modal-body">
+
+                                <div class="field">
+                                    <label class="label"></label>
+                                    <div class="control">
+                                        <img src="/static/coba/{{ cat.image }}" alt="Foto Sepatu" width="100%"
+                                            height="100%">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <label class="label">Brand Sepatu:</label>
+                                    <div class="control">
+                                        <input class="form-control" type="text" value="{{ cat.brand }}"
+                                            aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Ukuran Sepatu:</label>
+                                    <div class="control">
+                                        <input class="form-control" type="text" value="{{ cat.ukuran }}"
+                                            aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Harga Sepatu:</label>
+                                    <div class="control">
+                                        <input class="form-control" type="text" value="{{ cat.harga }}"
+                                            aria-label="Disabled input example" disabled readonly>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label">Deskripsi:</label>
+                                    <div class="control">
+                                        <textarea class="form-control" aria-label="Disabled input example" disabled
+                                            readonly>{{ cat.deskripsi }}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-hei" data-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
 
             </div>
+            <!-- end modal -->
+
             {% endfor %}
         </div>
 
-        <!-- modal -->
-        <div class="modal fade" id="myModal2">
-            <div class="modal-dialog">
-
-                <article class="media">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title text-bold">Detail</h5>
-                        </div>
-
-                        <div class="modal-body">
-
-                            <div class="field">
-                                <label class="label"></label>
-                                <div class="control">
-                                    <img src="../static" alt="Foto Sepatu" width="100%" height="100%" id="image">
-                                </div>
-                            </div>
-                            <div class="field">
-                                <label class="label">Brand Sepatu:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" value="we" id="brand"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="label">Ukuran Sepatu:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" value="e" id="ukuran"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="label">Harga Sepatu:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" value="Rp. 340.000" id="harga"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-
-                            <div class="field">
-                                <label class="label">Deskripsi:</label>
-                                <div class="control">
-                                    <input class="form-control" type="text" id="deskripsi"
-                                        value="Sepatu ini warna masih oke, cocok digunakan untuk running"
-                                        aria-label="Disabled input example" disabled readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <a type="button" class="btn btn-hei" data-dismiss="modal">Tutup</a>
-                    </div>
-            </div>
-            </article>
-
-        </div>
     </div>
+
+    <!-- end cat -->
 
     <!-- end cat -->
 

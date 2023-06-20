@@ -233,37 +233,51 @@ def input():
     
 @app.route("/edit_cat", methods=['GET', 'POST'])
 def edit_cat():
-    if request.method == "GET":
-        id = request.args.get("id")
-        data = db.catalog.find_one({"_id":ObjectId(id)})
-        data["_id"] = str(data["_id"])
-        print(data)
-        return render_template("edit_cat.html", data=data)
+    token_receive = request.cookies.get(ADMIN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        if request.method == "GET":
+            id = request.args.get("id")
+            data = db.catalog.find_one({"_id":ObjectId(id)})
+            data["_id"] = str(data["_id"])
+            print(data)
+            
+            name_info = db.admin.find_one({
+            'id': payload["id"]})
+            return render_template('edit_cat.html', name_info=name_info, data=data)
+
         
-    catalog = request.form["id"]
-    brand_receive = request.form["brand"]
-    ukuran_receive = request.form["ukuran"]
-    harga_receive = request.form["harga"]
-    deskripsi_receive = request.form["deskripsi"]
-    file_path= ""
-    file = request.files["image"]
+        catalog = request.form["id"]
+        brand_receive = request.form["brand"]
+        ukuran_receive = request.form["ukuran"]
+        harga_receive = request.form["harga"]
+        deskripsi_receive = request.form["deskripsi"]
+        file_path= ""
+        file = request.files["image"]
         
-    if file:
-        filename = secure_filename(file.filename)
-        extension = filename.split(".")[-1]
-        today = datetime.now()
-        mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
-        file_path = f'catalog-{mytime}.{extension}'
-        file.save("./static/coba/" + file_path)
-    doc = {
-            "brand": brand_receive,
-            "ukuran": ukuran_receive,
-            "harga": harga_receive,
-            "deskripsi": deskripsi_receive,
-            "image": file_path
-        }
-    db.catalog.update_one({"_id":  ObjectId(catalog)}, {"$set": doc})
-    return redirect('/admin_cat')
+        if file:
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            today = datetime.now()
+            mytime = today.strftime('%Y-%m-%d-%H-%M-%S')
+            file_path = f'catalog-{mytime}.{extension}'
+            file.save("./static/coba/" + file_path)
+        doc = {
+                "brand": brand_receive,
+                "ukuran": ukuran_receive,
+                "harga": harga_receive,
+                "deskripsi": deskripsi_receive,
+                "image": file_path
+            }
+        db.catalog.update_one({"_id":  ObjectId(catalog)}, {"$set": doc})
+        return redirect('/admin_cat')
+    
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('admin'))
 
 
 @app.route('/admin/list_order')
@@ -275,7 +289,7 @@ def orderan():
             SECRET_KEY, 
             algorithms=["HS256"],
         )
-        orders = list(db.transaksi.find({}))
+        orders = list(db.bukti.find({}))
         for od in orders:
            od["_id"] = str(od["_id"]) 
         name_info = db.admin.find_one({
@@ -284,6 +298,13 @@ def orderan():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for('admin'))
 
+@app.route('/admin_bukti')
+def admin_bukti():
+    id = request.args.get("id")
+    print(id)
+    order = db.bukti.find_one({'_id':ObjectId(id)})
+    order['_id'] = str(order['_id'])
+    return jsonify({"order":order})   
 
 @app.route("/detail_order", methods=['GET', 'POST'])
 def detail():
@@ -295,7 +316,7 @@ def detail():
             algorithms=["HS256"],
         )
         order_id = request.args.get("id")
-        collection = db['transaksi']
+        collection = db['bukti']
         order = collection.find_one({"_id": ObjectId(order_id)})
 
         order["_id"] = str(order["_id"])
@@ -304,12 +325,14 @@ def detail():
         return render_template("detail_order.html", order=order, name_info=name_info)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for('admin'))
+    
+  
 
 @app.route("/update_document", methods=['POST'])
 def update_document():
     id = request.form.get('id')
     new_status = request.form.get('status')
-    collection = db.transaksi
+    collection = db.bukti
     collection.update_one({'_id': ObjectId(id)}, {'$set': {'status': new_status}})
     
     return redirect('/admin/list_order')
@@ -396,7 +419,8 @@ def upload_bukti():
             "status":request.form['status'],
             "tanggal":request.form['tanggal'],
             "image":request.form['image'],
-            "bukti": file_path   
+            "bukti": file_path,   
+            "nohp":request.form['nohp']
         }
         print(transaksi)
         db.bukti.insert_one(transaksi)

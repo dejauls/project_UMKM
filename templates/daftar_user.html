@@ -37,11 +37,11 @@
         function navigateTo(url) {
             window.location.href = url;
         }
-        
+
         function logout() {
             $.removeCookie('mytoken', { path: '/' });
             alert('Keluar!');
-            window.location.href = '/login';
+            window.location.href = '/';
         }
     </script>
 
@@ -236,7 +236,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" onclick="navigateTo('/admin/catalog')">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/admin_cat')">Catalog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="navigateTo('/admin/list_order')">Order</a>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <!--code terbaru-->
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -66,7 +67,7 @@
     function logout() {
       $.removeCookie('mytoken', { path: '/' });
       alert('Keluar!');
-      window.location.href = '/login';
+      window.location.href = '/';
     }
 
   </script>
@@ -259,13 +260,13 @@
       margin-top: 5px;
     }
   </style>
-      <script>
-        function navigateTo(url) {
-            window.location.href = url;
-        }
-     
+  <script>
+    function navigateTo(url) {
+      window.location.href = url;
+    }
 
-    </script>
+
+  </script>
 
 </head>
 
@@ -274,36 +275,36 @@
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg fixed-top shadow">
     <div class="container">
-        <a class="navbar-brand" href="#">
-            <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="navigateTo('/about')">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#footer">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
-                        <i class="fas fa-user"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
+      <a class="navbar-brand" href="#">
+        <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="navigateTo('/about')">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#footer">Contact</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
+              <i class="fas fa-user"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
-</nav>
+  </nav>
 
 
   <!-- modal -->
@@ -333,37 +334,51 @@
   <!-- end  modal -->
 
   <!-- upload -->
-  <div class="container" id="upload">
-    <div class="card bg-body-secondary" style="width: 50%; height: 100px;">
-      <div class="card-body">
-        <form action="/upload_bukti" method="POST" enctype="multipart/form-data">
-          <h5 class="card-text">Nomor Rekening: 0434013123</h5>
-          <h5 class="card-text">Total Pembayaran: {{totalBelanja}}</h5>
+  <!-- upload -->
+  <section class="section mt-5">
+    <div class="container">
+      <div class="box" style="max-width: 500px; margin: auto; font-family: 'Montserrat', sans-serif;">
+        <article class="media">
+          <div class="media-content">
+            <form action="/upload_bukti" method="POST" enctype="multipart/form-data">
+              <div class="content">
+
+                <div class="field">
+                  <label class="label">Nomor Rekening:</label>
+                  <div class="control">
+                    <input class="form-control" type="text" value=" 0434013123 " aria-label="Disabled input example"
+                      disabled readonly>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Total Pembayaran: </label>
+                  <div class="control">
+                    <input class="form-control" type="text" value="{{ totalBelanja }}"
+                      aria-label="Disabled input example" disabled readonly>
+                  </div>
+                </div>
+                <h4 class="mt-5 mb-4">Upload Bukti Pembayaran</h4>
+                <div class="holder">
+                  <img id="imgPreview" src="../static/no_image.png" alt="pic" />
+                </div>
+                <input type="file" name="bukti" id="photo" required="true" />
+                <input type="hidden" name="image" value="{{doc.image}}">
+                <input type="hidden" name="totalBelanja" value="{{doc.totalBelanja}}">
+                <input type="hidden" name="nama" value="{{doc.nama}}">
+                <input type="hidden" name="alamat" value="{{doc.alamat}}">
+                <input type="hidden" name="brand" value="{{doc.brand}}">
+                <input type="hidden" name="status" value="{{doc.status}}">
+                <input type="hidden" name="tanggal" value="{{doc.tanggal}}">
+                <input type="hidden" name="nohp" value="{{doc.nohp}}">
+                <button class="btn btn-hei rounded-5 mt-3 mb-3" type="submit">Submit</button>
+              </div>
+            </form>
+        </article>
       </div>
     </div>
-    <h4 class="mt-5 mb-4">Upload Bukti Pembayaran</h4>
-    <div class="holder">
-      <img id="imgPreview" src="../static/no_image.png" alt="pic" />
-    </div>
-    <input type="file" name="bukti" id="photo" required="true" />
-    <input type="hidden" name="image" value="{{doc.image}}">
-    <input type="hidden" name="totalBelanja" value="{{doc.totalBelanja}}">
-    <input type="hidden" name="nama" value="{{doc.nama}}">
-    <input type="hidden" name="alamat" value="{{doc.alamat}}">
-    <input type="hidden" name="brand" value="{{doc.brand}}">
-    <input type="hidden" name="status" value="{{doc.status}}">
-    <input type="hidden" name="tanggal" value="{{doc.tanggal}}">
-    <button class="btn btn-hei rounded-5 mt-3 mb-3" type="submit">Submit</button>
-  </div>
-  </form>
-  </div>
-  <div class="container">
+  </section>
+  <!-- upload end -->
 
-  </div>
-  </div>
-  </div>
-
-  <!-- upload end -->
 
 
 
