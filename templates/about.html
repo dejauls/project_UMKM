@@ -57,6 +57,26 @@
 
   </script>
 
+<script>
+  $(document).ready(function () {
+    $('#login').click(function () {
+      $('#modal , #bg').fadeIn("slow");
+    });
+    $('#tutup').click(function () {
+      $('#modal , #bg').fadeOut("slow");
+    });
+  });
+
+  function login() {
+    window.location.href = "/login"
+  }
+
+  function admin() {
+    window.location.href = "/admin"
+  }
+
+</script>
+
   <style>
     * {
       font-family: 'DM Sans', sans-serif;
@@ -286,8 +306,8 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12 text-center">
-              <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
-              <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
+              <a class="btn btn-outline-brown btn-lg" onclick="login()">Pembeli</a>
+              <a class="btn btn-outline-brown btn-lg" onclick="admin()">Admin</a>
             </div>
           </div>
         </div>
