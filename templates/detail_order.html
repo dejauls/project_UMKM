@@ -273,12 +273,13 @@
 
 
     <!-- modal -->
+    <!-- modal -->
     <div class="modal fade" id="postModal" tabindex="-1" role="dialog" aria-labelledby="postModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Login akun sebagai</h5>
+                    <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Yakin keluar?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -286,8 +287,7 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
-                            <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
+                            <button onclick="logout()" class="btn btn-outline-brown btn-lg">Keluar</button>
                         </div>
                     </div>
                 </div>
@@ -296,6 +296,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- end  modal -->
 

@@ -191,6 +191,18 @@
         }
     </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+        function scrollToFooter() {
+            const footer = document.getElementById('footer');
+            footer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+    </script>
+
     <script>
         const menuIcon = document.getElementById("menu-icon");
         const menuList = document.getElementById("menu-list");

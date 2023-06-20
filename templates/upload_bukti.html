@@ -259,6 +259,13 @@
       margin-top: 5px;
     }
   </style>
+      <script>
+        function navigateTo(url) {
+            window.location.href = url;
+        }
+     
+
+    </script>
 
 </head>
 
@@ -267,36 +274,36 @@
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg fixed-top shadow">
     <div class="container">
-      <a class="navbar-brand" href="#">
-        <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Catalog</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-secondary" href="#">Contact</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
-              <i class="fas fa-user"></i>
-            </a>
-          </li>
-        </ul>
-      </div>
+        <a class="navbar-brand" href="#">
+            <img src="../static/logo.png" alt="my-avatar" style="width: 170px; height: auto;">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="navigateTo('/about')">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#footer">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
+                        <i class="fas fa-user"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
 
 
   <!-- modal -->
