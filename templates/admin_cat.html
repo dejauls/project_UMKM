@@ -283,12 +283,20 @@
                         <p style="margin-bottom: 0.5rem;">{{ cat.ukuran }}</p>
                         <p style="font-weight: bold;">{{ cat.harga }}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
+                            <div class="btn-group" role="group" >
+                                <button type="button" style="margin-right: 1rem;" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
                                     data-target="#myModal2{{ cat._id }}">Detail</button>
-                                <a href="/edit_cat?id={{cat._id}}" type="button" class="btn btn-sm btn-hei rounded-5">
+                                <a href="/edit_cat?id={{cat._id}}" type="button" style="margin-right: 1rem;" class="btn btn-sm btn-hei rounded-5">
                                     Edit
                                 </a>
+                                <div>
+                                    <form action="/delete_cat" method="post">
+                                        <input type="hidden" name="id" value="{{cat._id}}">
+                                    <button type="submit" class="btn btn-sm btn-outline-brown rounded-5"
+                                        >Hapus</button>
+                                    </form>
+                                </div>
+                                
                             </div>
                             <small class="text-body-secondary"></small>
                         </div>

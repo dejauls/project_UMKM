@@ -278,7 +278,12 @@ def edit_cat():
     
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for('admin'))
-
+    
+@app.route('/delete_cat', methods=['GET', 'POST'])
+def delete():
+    id = request.form["id"]
+    db.catalog.delete_one({'_id': ObjectId(id)})
+    return redirect('/admin_cat') 
 
 @app.route('/admin/list_order')
 def orderan():
