@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--code terbaru-->
 
 <head>
     <meta charset="UTF-8" />
@@ -104,7 +105,6 @@
         }
 
         .menu-icon {
-            /* background-color: tomato; */
             font-size: 28px;
             display: none;
         }
@@ -196,36 +196,11 @@
     </style>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <script>
-        var currentPage = 1;
-        var perPage = 5;
-
-        function loadData() {
-            $.ajax({
-                url: '/load_data',
-                type: 'POST',
-                data: { page: currentPage, per_page: perPage },
-                success: function (response) {
-                    var data = response.data;
-                    var dataList = document.getElementById('data-list');
-
-                    for (var i = 0; i < data.length; i++) {
-                        var listItem = document.createElement('li');
-                        listItem.innerHTML = data[i];
-                        dataList.appendChild(listItem);
-                    }
-
-                    currentPage++;
-                }
-            });
+        function logout() {
+            $.removeCookie('admintoken', { path: '/' });
+            alert('Keluar!');
+            window.location.href = '/admin';
         }
-
-        $(document).ready(function () {
-            loadData();
-
-            $('#load-more-btn').click(function () {
-                loadData();
-            });
-        });
     </script>
 
 </head>
@@ -274,7 +249,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;"></h5>
+                    <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Yakin Keluar?</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -282,12 +257,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-12 text-center">
-                            <a href="home.html" class="btn btn-outline-brown btn-lg">Log out</a>
+                            <button onclick="logout()" class="btn btn-outline-brown btn-lg">Keluar</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Tutup</button>
                 </div>
             </div>
         </div>
@@ -315,12 +290,11 @@
                             <div>
                                 <button type="button" class="btn btn-sm btn-outline-brown rounded-5" data-toggle="modal"
                                     data-target="#myModal2{{ cat._id }}">Detail</button>
-                                <a href="/edit_cat?id={{cat._id}}" type="button"
-                                    class="btn btn-sm btn-hei rounded-5">
+                                <a href="/edit_cat?id={{cat._id}}" type="button" class="btn btn-sm btn-hei rounded-5">
                                     Edit
                                 </a>
                             </div>
-                            <small class="text-body-secondary">9 mins</small>
+                            <small class="text-body-secondary"></small>
                         </div>
                     </div>
                 </div>
@@ -396,19 +370,11 @@
 
     </div>
 
-
-    <div class="d-flex justify-content-center">
-        <ul id="data-list"></ul>
-        <button type="button" class="btn btn-hei" style="border-radius: 10px;" id="load-more-btn">
-            Load More
-        </button>
-    </div>
-
     <!-- end cat -->
 
     <!-- footer -->
-    <footer
-        class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top mt-5 bg-black text-white">
+    <footer id="footer"
+        class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
         <div class="container">
             <div class="row">
                 <div class="col-4">
@@ -417,25 +383,32 @@
                         yang
                         berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!
                     </p>
-                    <h6 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
+                    <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
                         Tropodo,
-                        Tropodo, Waru, Sidoarjo</h6>
+                        Tropodo, Waru, Sidoarjo</h8>
                 </div>
                 <div class="col-4">
                     <h4 style="font-weight: bolder;">Temukan kami</h4>
                     <ul class="list-unstyled">
-                        <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
-                        <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
-                        <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
+                        <li><a class="text-white" href="https://www.instagram.com/triple.s.branded/">Instagram</a></li>
+                        <li><a class="text-white"
+                                href="https://www.facebook.com/profile.php?id=100081044364309">Facebook</a></li>
+                        <li><a class="text-white"
+                                href="https://api.whatsapp.com/send?phone=6281233488255&text=Hi">Whatsapp</a></li>
                     </ul>
                 </div>
                 <div class="col-4">
                     <h4 style="font-weight: bolder;">Links</h4>
                     <ul class="list-unstyled">
-                        <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
-                        <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
-                        <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
-                        <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="navigateTo('/about')">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -445,23 +418,13 @@
     <!-- footer -->
 
 
-    <script>
-        const menuIcon = document.getElementById("menu-icon");
-        const menuList = document.getElementById("menu-list");
-
-        menuIcon.addEventListener("click", () => {
-            menuList.classList.toggle("hidden");
-        });
-
-
-    </script>
 </body>
-<!-- Include the Font Awesome JavaScript library -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>  -->
+
 <!-- Bootstrap Core JavaScript -->
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
 

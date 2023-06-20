@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<!--code terbaru-->
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -45,16 +45,16 @@
   <!-- Font Awesome CDN -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
-  
+
 
   <script>
-  $(document).ready(()=>{
-      $('#photo').change(function(){
+    $(document).ready(() => {
+      $('#photo').change(function () {
         const file = this.files[0];
         console.log(file);
-        if (file){
+        if (file) {
           let reader = new FileReader();
-          reader.onload = function(event){
+          reader.onload = function (event) {
             console.log(event.target.result);
             $('#imgPreview').attr('src', event.target.result);
           }
@@ -62,9 +62,45 @@
         }
       });
     });
-     
-   
-   
+
+    function logout() {
+      $.removeCookie('mytoken', { path: '/' });
+      alert('Keluar!');
+      window.location.href = '/login';
+    }
+
+  </script>
+
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <script>
+    const menuIcon = document.getElementById("menu-icon");
+    const menuList = document.getElementById("menu-list");
+
+    menuIcon.addEventListener("click", () => {
+      menuList.classList.toggle("hidden");
+    });
+
+    function get(id) {
+      $.ajax({
+        url: "/catalog_detail?id=" + id,
+        type: "GET",
+        success: function (response) {
+          detail = response.detail
+          $('#myModal2').find('.modal-body #brand').val(detail.brand);
+          $('#myModal2').find('.modal-body #ukuran').val(detail.ukuran);
+          $('#myModal2').find('.modal-body #harga').val(detail.harga);
+          $('#myModal2').find('.modal-body #deskripsi').val(detail.deskripsi);
+          $('#myModal2').find('.modal-body #image').attr('src', '/static/' + detail.image);
+          $('#myModal2').modal('show');
+
+        },
+        error: function (xhr, status, error) {
+          console.log('Request failed. Returned status of ' + xhr.status);
+        }
+      });
+    }
+
   </script>
 
   <style>
@@ -201,38 +237,29 @@
         font-size: 20px;
       }
     }
-    #upload{
+
+    #upload {
       margin-top: 100px;
     }
 
-    
-    .footer {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background-color: rgb(0, 0, 0);
-      color: white;
+    .holder {
+      height: 300px;
+      width: 300px;
+      border: 2px solid black;
     }
 
-    .holder {
-        height: 300px;
-        width: 300px;
-        border: 2px solid black;
-      }
-      #imgPreview {
-         max-width: 300px;
-         max-height: 300px;
-         min-width: 300px;
-         min-height: 300px;
-      }
-      input[type="file"] {
-           margin-top: 5px;
-        }
-           
-    
+    #imgPreview {
+      max-width: 300px;
+      max-height: 300px;
+      min-width: 300px;
+      min-height: 300px;
+    }
+
+    input[type="file"] {
+      margin-top: 5px;
+    }
   </style>
-  
+
 </head>
 
 <body>
@@ -278,7 +305,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Login akun sebagai</h5>
+          <h5 class="modal-title" id="postModalLabel" style="font-weight: bold;">Yakin Keluar?</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -286,104 +313,64 @@
         <div class="modal-body">
           <div class="row">
             <div class="col-md-12 text-center">
-              <a href="login_user.html" class="btn btn-outline-brown btn-lg">Pembeli</a>
-              <a href="login_admin.html" class="btn btn-outline-brown btn-lg">Admin</a>
+              <button onclick="logout()" class="btn btn-outline-brown btn-lg">Keluar</button>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-hei rounded-5" data-dismiss="modal">Tutup</button>
         </div>
       </div>
     </div>
   </div>
   <!-- end  modal -->
 
-<!-- upload -->
-<div class="container" id="upload">
-  <div class="card bg-body-secondary" style="width: 100%; height: 160px;">
+  <!-- upload -->
+  <div class="container" id="upload">
+    <div class="card bg-body-secondary" style="width: 50%; height: 100px;">
       <div class="card-body">
-      <form action="/upload_bukti" method="POST" enctype="multipart/form-data">
-        <h5 class="card-text pb-3">Total Pembayaran: {{totalBelanja}}</h5>
-        <h5 class="card-text">Nomor Rekening: 0434013123</h5>
+        <form action="/upload_bukti" method="POST" enctype="multipart/form-data">
+          <h5 class="card-text">Nomor Rekening: 0434013123</h5>
+          <h5 class="card-text">Total Pembayaran: {{totalBelanja}}</h5>
       </div>
     </div>
     <h4 class="mt-5 mb-4">Upload Bukti Pembayaran</h4>
-          <div class="holder">
-              <img id="imgPreview" src="#" alt="pic" />
-          </div>
-          <input type="file" name="image" id="photo" required="true" />
-          <input type="hidden" name="totalBelanja" value="{{totalBelanja}}">
-          <button class="btn btn-secondary mt-3 mb-3" type="submit">Submit</button>
-      </div>
-    </form>
+    <div class="holder">
+      <img id="imgPreview" src="../static/no_image.png" alt="pic" />
     </div>
-    <div class="container">
-    
-    </div>
-    </div>
-</div>
+    <input type="file" name="bukti" id="photo" required="true" />
+    <input type="hidden" name="image" value="{{doc.image}}">
+    <input type="hidden" name="totalBelanja" value="{{doc.totalBelanja}}">
+    <input type="hidden" name="nama" value="{{doc.nama}}">
+    <input type="hidden" name="alamat" value="{{doc.alamat}}">
+    <input type="hidden" name="brand" value="{{doc.brand}}">
+    <input type="hidden" name="status" value="{{doc.status}}">
+    <input type="hidden" name="tanggal" value="{{doc.tanggal}}">
+    <button class="btn btn-hei rounded-5 mt-3 mb-3" type="submit">Submit</button>
+  </div>
+  </form>
+  </div>
+  <div class="container">
 
-<!-- upload end -->
+  </div>
+  </div>
+  </div>
+
+  <!-- upload end -->
 
 
 
   </hr>
-  <!-- footer -->
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-5 border-top bg-black text-white">
-    <div class="container">
-      <div class="row">
-        <div class="col-4">
-          <h4 style="font-weight: bolder;">Triple’s Branded</h4>
-          <p class="text-body-white" style="font-size: 13px;">Triple’s Branded menjual sepatu branded second
-            yang
-            berkualitas. Kamu juga bisa temukan kami di bazar daerah, selengkapnya staytune di sosmed ya!
-          </p>
-          <h8 class="text-body-white" style="font-size: 12px; font-weight: 600;">Jl. Bengawan BR 05, Wisma
-            Tropodo,
-            Tropodo, Waru, Sidoarjo</h8>
-        </div>
-        <div class="col-4">
-          <h4 style="font-weight: bolder;">Temukan kami</h4>
-          <ul class="list-unstyled">
-            <li><a class="text-white" href="#" style="font-size: 12px;">Instagram</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Facebook</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Whatsapp</a></li>
-          </ul>
-        </div>
-        <div class="col-4">
-          <h4 style="font-weight: bolder;">Links</h4>
-          <ul class="list-unstyled">
-            <li><a class="text-white" href="#" style="font-size: 12px;">Home</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">About</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Catalog</a></li>
-            <li><a class="text-white" href="#" style="font-size: 12px;">Contact</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- footer -->
 
 
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
-
-  <!-- Include the Font Awesome JavaScript library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>  -->
+
   <!-- Bootstrap Core JavaScript -->
   <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
-
 </body>
 
 </html>

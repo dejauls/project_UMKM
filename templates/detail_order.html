@@ -220,7 +220,7 @@
             background-color: rgb(0, 0, 0);
             color: white;
             height: 60px;
-            
+
         }
 
         .thead-color {
@@ -302,48 +302,37 @@
     <!-- daftar -->
     <div class="container">
         <h1>Detail Order</h1>
-        <table class="table table-striped">
-            <thead class="thead-color ">
-                <tr>
-                    <th class="text-white">Product</th>
-                    <th class="text-white">Nama User</th>
-                    <th class="text-white">Alamat </th>
-                    <th class="text-white">Total   </th>
-                    <th class="text-white">Nomor Hp</th>
-                    <th class="text-white">Status Pesanan</th>
-                    <th class="text-white">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for detail in transaksi %}
-                <tr>
-                    <td>{{ detail.brand }}</td>
-                    <td>{{ detail.nama }}</td>
-                    <td>{{ detail.alamat }}</td>
-                    <td>{{ detail.totalBelanja }}</td>
-                    <td>{{ detail.nohp }}</td>
-                    <td>{{ detail.status }}</td>
-                    <td>
-                        <form method="POST" action="{{ url_for('update_document', id=detail['_id']) }}">
-                            <select name="status" onchange="this.form.submit()">
-                                <option value="Belum Dikirim" {% if detail['status'] == 'Belum Dikirim' %}selected{% endif %}>Belum Dikirim</option>
-                                <option value="Sudah Dikirim" {% if detail['status'] == 'Sudah Dikirim' %}selected{% endif %}>Sudah Dikirim</option>
-                                <option value="Selesai" {% if detail['status'] == 'Selesai' %}selected{% endif %}>Selesai</option>
-                            </select>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+
+        <div class="card" style="width: 18rem;">
+            <img src="/static/basket.jpeg" class="card-img-top" alt="...">
+
+            <ul class="list-group list-group-item">
+                <li class="list-group-item">Nama Produk : {{ order.brand }}</li>
+                <li class="list-group-item">Nama pemesan : {{ order.nama }}</li>
+                <li class="list-group-item">Alamat : {{ order.alamat }}</li>
+                <li class="list-group-item">Total Harga : {{ order.totalBelanja }}</li>
+                <li class="list-group-item">Nomor hp : {{ order.nohp }}</li>
+                <li class="list-group-item">Status pesanan : {{ order.status }}</li>
+            </ul>
+            <div class="card-body">
+                <form action="/update_document" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="id" value="{{order['_id']}}">
+                    <div>
+                        <label for="">Status</label>
+                        <select name="status">
+                            <option value="Belum dikirim">Belum dikirim</option>
+                            <option value="Sudah dikirim">Sudah dikirim</option>
+                            <option value="Selesai">Selesai</option>
+                        </select>
+                    </div>
+                    <button type="submit">Simpan</button>
+                </form>
+            </div>
+        </div>
+
     </div>
     <!-- end daftar -->
 
-    
-    <!-- footer -->
-
-
-    <!-- Include the Font Awesome JavaScript library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
