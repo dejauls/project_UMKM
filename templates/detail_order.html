@@ -37,6 +37,12 @@
         function navigateTo(url) {
             window.location.href = url;
         }
+
+        function logout() {
+            $.removeCookie('mytoken', { path: '/' });
+            alert('Keluar!');
+            window.location.href = '/login';
+        }
     </script>
 
     <style>
@@ -256,11 +262,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="navigateTo('/admin/daftar_user')">User</a>
                     </li>
-                    <form class="d-flex" role="search">
-                        <input class=" form-control me-2 rounded-5" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <button class="btn btn-outline-brown rounded-5" type="submit">Search</button>
-                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
                             <i class="fas fa-user"></i>
@@ -305,32 +306,68 @@
         <h1>Detail Order</h1>
 
         <div class="card" style="width: 18rem;">
-            <img src="/static/basket.jpeg" class="card-img-top" alt="...">
+            <img src="/static/coba/{{ order.image }}" class="card-img-top" alt="...">
 
             <ul class="list-group list-group-item">
-                <li class="list-group-item">Nama Produk : {{ order.brand }}</li>
-                <li class="list-group-item">Nama pemesan : {{ order.nama }}</li>
-                <li class="list-group-item">Alamat : {{ order.alamat }}</li>
-                <li class="list-group-item">Total Harga : {{ order.totalBelanja }}</li>
-                <li class="list-group-item">Nomor hp : {{ order.nohp }}</li>
-                <li class="list-group-item">Status pesanan : {{ order.status }}</li>
-            </ul>
-            <div class="card-body">
-                <form action="/update_document" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="id" value="{{order['_id']}}">
-                    <div>
-                        <label for="">Status</label>
-                        <select name="status">
-                            <option value="Belum dikirim">Belum dikirim</option>
-                            <option value="Sudah dikirim">Sudah dikirim</option>
-                            <option value="Selesai">Selesai</option>
-                        </select>
+                <div class="field">
+                    <label class="label">Nama Produk:</label>
+                    <div class="control">
+                        <input class="form-control" type="text" value=" {{ order.brand }}"
+                            aria-label="Disabled input example" disabled readonly>
                     </div>
-                    <button type="submit">Simpan</button>
-                </form>
-            </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nama Pemesan: </label>
+                    <div class="control">
+                        <input class="form-control" type="text" value="{{ order.nama }}"
+                            aria-label="Disabled input example" disabled readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Alamat: </label>
+                    <div class="control">
+                        <input class="form-control" type="text" value="{{ order.alamat }}"
+                            aria-label="Disabled input example" disabled readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Total Harga: </label>
+                    <div class="control">
+                        <input class="form-control" type="text" value="{{ order.totalBelanja }}"
+                            aria-label="Disabled input example" disabled readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Nomor HP: </label>
+                    <div class="control">
+                        <input class="form-control" type="text" value="{{ order.nohp }}"
+                            aria-label="Disabled input example" disabled readonly>
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Status Pesanan: </label>
+                    <div class="control">
+                        <input class="form-control" type="text" value="{{ order.status }}"
+                            aria-label="Disabled input example" disabled readonly>
+                    </div>
+                </div>
+            </ul>
         </div>
 
+        <div class="card-body">
+            <form action="/update_document" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="{{order['_id']}}">
+                <div class="field">
+                    <label for="">Status</label>
+                    <select name="status" class="form-select" aria-label="Default select example">
+                        <option value="Belum dikirim">Belum dikirim</option>
+                        <option value="Sudah dikirim">Sudah dikirim</option>
+                        <option value="Selesai">Selesai</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-hei rounded-5 mt-3">Simpan</button>
+            </form>
+        </div>
     </div>
     <!-- end daftar -->
 

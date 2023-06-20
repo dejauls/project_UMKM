@@ -37,6 +37,12 @@
         function navigateTo(url) {
             window.location.href = url;
         }
+
+        function logout() {
+            $.removeCookie('mytoken', { path: '/' });
+            alert('Keluar!');
+            window.location.href = '/login';
+        }
     </script>
 
     <style>
@@ -245,11 +251,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" onclick="navigateTo('/admin/daftar_user')">User</a>
                     </li>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <button class="btn btn-outline-brown rounded-5" type="submit">Search</button>
-                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
                             <i class="fas fa-user"></i>

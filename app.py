@@ -63,13 +63,20 @@ def login():
 
 @app.route('/admin/daftar_user')
 def user():
-    collection = db.users
-    users = collection.find({})
-   
-    return render_template('daftar_user.html',
-                            users=users
-                            )
-
+    token_receive = request.cookies.get(ADMIN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        collection = db.users
+        users = collection.find({})
+        name_info = db.admin.find_one({
+            'id': payload["id"]})
+        return render_template('daftar_user.html', users=users, name_info=name_info)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('admin'))
 
 @app.route("/admin/login", methods=["POST"])
 def admin_login():
@@ -273,21 +280,42 @@ def edit_cat():
 
 @app.route('/admin/list_order')
 def orderan():
-    orders = list(db.transaksi.find({}))
-    for od in orders:
-       od["_id"] = str(od["_id"]) 
-
-    return render_template('transaksi_admin.html', orders=orders)
+    token_receive = request.cookies.get(ADMIN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        orders = list(db.transaksi.find({}))
+        for od in orders:
+           od["_id"] = str(od["_id"]) 
+        name_info = db.admin.find_one({
+            'id': payload["id"]})
+        return render_template('transaksi_admin.html', orders=orders, name_info=name_info)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('admin'))
 
 
 @app.route("/detail_order", methods=['GET', 'POST'])
 def detail():
-    order_id = request.args.get("id")
-    collection = db['transaksi']
-    order = collection.find_one({"_id": ObjectId(order_id)})
+    token_receive = request.cookies.get(ADMIN_KEY)
+    try:
+        payload = jwt.decode(
+            token_receive, 
+            SECRET_KEY, 
+            algorithms=["HS256"],
+        )
+        order_id = request.args.get("id")
+        collection = db['transaksi']
+        order = collection.find_one({"_id": ObjectId(order_id)})
 
-    order["_id"] = str(order["_id"])
-    return render_template("detail_order.html", order=order)
+        order["_id"] = str(order["_id"])
+        name_info = db.admin.find_one({
+            'id': payload["id"]})
+        return render_template("detail_order.html", order=order, name_info=name_info)
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for('admin'))
 
 @app.route("/update_document", methods=['POST'])
 def update_document():

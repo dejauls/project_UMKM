@@ -199,7 +199,7 @@
         function logout() {
             $.removeCookie('admintoken', { path: '/' });
             alert('Keluar!');
-            window.location.href = '/admin';
+            window.location.href = '/';
         }
     </script>
 
@@ -222,16 +222,11 @@
                         <a class="nav-link" href="/admin_cat">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/transaksi_admin">Order</a>
+                        <a class="nav-link" href="/admin/list_order">Order</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/daftar_user">User</a>
+                        <a class="nav-link" href="/admin/daftar_user">User</a>
                     </li>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2 rounded-5" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <button class="btn btn-outline-brown rounded-5" type="submit">Search</button>
-                    </form>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
                             <i class="fas fa-user"></i>

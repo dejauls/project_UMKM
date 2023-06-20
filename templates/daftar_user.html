@@ -37,6 +37,12 @@
         function navigateTo(url) {
             window.location.href = url;
         }
+        
+        function logout() {
+            $.removeCookie('mytoken', { path: '/' });
+            alert('Keluar!');
+            window.location.href = '/login';
+        }
     </script>
 
     <style>
