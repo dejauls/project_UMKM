@@ -6,14 +6,23 @@ from flask import Flask, render_template,jsonify,request,redirect,url_for
 from werkzeug.utils import secure_filename
 from bson import ObjectId
 
+import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+MONGODB_URI = os.environ.get("MONGODB_URI")
+DB_NAME =  os.environ.get("DB_NAME")
+
 app = Flask(__name__)
 
 app.config ['TEMPLATES_AUTO_RELOAD'] = True
 app.config ['UPLOAD_FOLDER'] = './static/profile_pics'
 
-MONGODB_CONNECTION_STRING = 'mongodb://jaul:kelompok4@ac-tckcnrv-shard-00-00.iyckasz.mongodb.net:27017,ac-tckcnrv-shard-00-01.iyckasz.mongodb.net:27017,ac-tckcnrv-shard-00-02.iyckasz.mongodb.net:27017/?ssl=true&replicaSet=atlas-ehh9a0-shard-0&authSource=admin&retryWrites=true&w=majority'
-client = MongoClient(MONGODB_CONNECTION_STRING)
-db = client.umkm
+client = MongoClient(MONGODB_URI)
+db = client[DB_NAME]
 
 TOKEN_KEY = 'mytoken'
 SECRET_KEY = 'SAYA'
