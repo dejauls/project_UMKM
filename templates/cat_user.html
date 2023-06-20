@@ -6,7 +6,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Navbar 1</title>
+    <title>Catalog</title>
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
     <!-- Font Awesome CSS -->
@@ -209,7 +209,7 @@
                     $('#myModal2').find('.modal-body #ukuran').val(detail.ukuran);
                     $('#myModal2').find('.modal-body #harga').val(detail.harga);
                     $('#myModal2').find('.modal-body #deskripsi').val(detail.deskripsi);
-                    $('#myModal2').find('.modal-body #image').attr('src', '/static/' + detail.image);
+                    $('#myModal2').find('.modal-body #image').attr('src', '/static/coba/' + detail.image);
                     $('#myModal2').modal('show');
 
                 },
@@ -243,16 +243,16 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="">Home</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/')">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="">About</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/about')">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Catalog</a>
+                        <a class="nav-link" href="#" onclick="navigateTo('/catalog')">Catalog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="#footer">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#postModal">
@@ -313,7 +313,7 @@
                                 </form>
 
                             </div>
-                            <small class="text-body-secondary">9 mins</small>
+                            <small class="text-body-secondary"></small>
                         </div>
                     </div>
                 </div>
